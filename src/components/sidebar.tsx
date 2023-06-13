@@ -1,5 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { useState } from "react";
+import Carrosel from "@/pages/admin/carrosel";
 import Dashboard from "./dashboard";
 import UsersPanel from "../pages/Users/UsersPanel";
 
@@ -7,27 +8,25 @@ export default function Sidebar() {
     const [step, setStep] = useState<string>("")
     const renderStep = () => {
         switch (step) {
-            case 'dashboard':
-                return <Dashboard />
-            case 'users':
-                return <UsersPanel />
+            case 'carrosel':
+                return <Carrosel />
             default:
                 return <Dashboard />
         }
     }
     return (
         <Flex direction="row">
-            <Flex bg="rgb(86, 73, 255)" height="100vh" width="15%" direction="column">
+            <Flex bg='yellow.400' height="100vh" width="15%" direction="column">
                 <Flex p={10}>
-                    <Text color="white" fontSize="20px">Admin Taxly</Text>
+                    <Text color="black" fontSize="20px">Ligare Admin</Text>
                 </Flex>
                 <Flex mt={15} p={4} direction="column" gap={4}>
-                    <Text color="white" fontSize="16px" cursor="pointer" onClick={() => setStep("dashboard")}>Dashboard</Text>
-                    <Text color="white" fontSize="16px" cursor="pointer" onClick={() => setStep("users")}>Usuários</Text>
-                    <Text color="white" fontSize="16px" cursor="pointer" onClick={() => setStep("companies")}>Empresas</Text>
+                    <Text color="black" fontSize="16px" cursor="pointer" onClick={() => setStep("carrosel")}>Carrosel</Text>
+                    <Text color="black" fontSize="16px" cursor="pointer" onClick={() => setStep("users")}>Quem somos</Text>
+                    <Text color="black" fontSize="16px" cursor="pointer" onClick={() => setStep("companies")}>Serviços</Text>
                 </Flex>
             </Flex>
-             {renderStep()}
+            {renderStep()}
         </Flex>
 
     )
