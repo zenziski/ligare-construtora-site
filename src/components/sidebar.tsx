@@ -16,7 +16,7 @@ export default function Sidebar() {
     }
     return (
         <Flex direction="row">
-            <Flex bg='yellow.400' height="100vh" width="15%" direction="column">
+            <Flex bg='yellow.400' height="100vh" width="15%" minWidth='180px' direction="column">
                 <Flex p={10}>
                     <Text color="black" fontSize="20px">Ligare Admin</Text>
                 </Flex>
