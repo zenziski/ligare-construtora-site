@@ -1,33 +1,23 @@
-import { useState } from "react"
-import { Flex, Text, Card, CardBody, Input, Button, useToast, Image } from "@chakra-ui/react"
+import { useState, useRef } from "react"
+import { Flex, Text, Card, CardBody, Input, Button, useToast, Image, Box } from "@chakra-ui/react"
 import MiniLoading from "@/components/miniLoading"
 
 export default function Carrosel() {
-
-    const [file, setFile] = useState<File | undefined>(); // Adicionando o tipo File para o estado 'file'
-    const [selectedImage, setSelectedImage] = useState<string | undefined>(); // Definindo o tipo da URL da imagem selecionada
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [imgs, setImgs] = useState<string[]>([]);
+    const [files, setFiles] = useState<File[]>([]);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const toast = useToast();
 
-    const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            const selectedFile = e.target.files[0];
-            setFile(selectedFile);
-            setSelectedImage(URL.createObjectURL(selectedFile));
-        }
-    }
-
     const handleUpload = async () => {
 
-        if (!file) {
+        if (!files) {
             toast({
                 title: 'Arquivo obrigatório',
-                description: `É obrigatório colocar um arquivo para upload`,
+                description: `É obrigatório colocar pelo menos um arquivo para upload`,
                 status: 'error',
                 duration: 5000,
-                isClosable: true
+                isClosable: true,
             })
 
             return
@@ -35,15 +25,9 @@ export default function Carrosel() {
 
         setIsLoading(true)
 
-        console.log(file);
-
         // Simulação de carga assíncrona (remova isso no código final)
         await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        setIsLoading(false);
-        setSelectedImage(undefined); // Limpar a prévia da imagem após o upload
-        setFile(undefined); // Limpar o arquivo selecionado após o upload
-
+        setFiles([]); // Limpar o arquivo selecionado após o upload
         setIsLoading(false)
 
         toast({
@@ -58,33 +42,69 @@ export default function Carrosel() {
 
     }
 
+    const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        const droppedFiles = Array.from(event.dataTransfer.files);
+        setFiles(droppedFiles);
+    };
+
+    const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+    };
+
+    const handleClick = () => {
+        fileInputRef.current!.click();
+    };
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFiles = Array.from(event.target.files || []);
+        setFiles(selectedFiles);
+    };
+
     return (
         <Flex padding={2} flexDirection='column' height='100vh' overflow='auto' >
             <Text fontSize='2xl' fontWeight='bold'>
-                Upload de imagens para o carrosel
+                Galeria de Imagens
             </Text>
-            <Flex justifyContent='center'>
-                <Card marginTop={10}>
-                    <CardBody display='flex'>
-                        <Input placeholder="Imagem" type='file' isDisabled={isLoading} onChange={handleFile} accept="image/*" />
-                        <Button colorScheme='yellow' isDisabled={isLoading} onClick={handleUpload} ><Text marginLeft={2}>Enviar</Text> {isLoading ? (<MiniLoading color="black" size='20px' />) : null}</Button>
-                    </CardBody>
-                </Card>
-                <Flex marginLeft={10} >
-                    {selectedImage ? (<Image alt='preview' src={selectedImage} width='300px' height='300px' />) : null}
-                </Flex>
-            </Flex>
-            <Flex>
-                {
-                    imgs.map((e: any) => {
-                        return (
-                            <>
-                                ola
-                            </>
-                        )
-                    })
-                }
-            </Flex>
+            <Card
+                onDrop={handleDrop}
+                onDragOver={handleDragOver}
+                borderColor="black"
+                p={4}
+                textAlign="center"
+                onClick={handleClick}
+                cursor="pointer"
+            >
+                <Text fontSize="xl" mb={4}>
+                    Arraste e solte as imagens aqui
+                </Text>
+                <Input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleFileChange}
+                    style={{ display: 'none' }}
+                    multiple
+                />
+                {files.length > 0 && (
+                    <Box>
+                        <Text fontSize="lg" mb={2}>
+                            Arquivos:
+                        </Text>
+                        <Flex>
+                            {files.map((file: File, index) => (
+                                <div style={{ margin: '10px' }}>
+                                    <Image src={URL.createObjectURL(file)} width='300px' height='300px' />
+                                    <Text key={index}>{file.name}</Text>
+                                </div>
+                            ))}
+                        </Flex>
+                    </Box>
+                )}
+
+            </Card>
+            <Box>
+                <Button bgColor='blackAlpha.400' _hover={{ bg: '#ecdb19' }} isDisabled={isLoading} onClick={handleUpload} ><Text marginLeft={2}>Enviar</Text> {isLoading ? (<MiniLoading color="black" size={20} />) : null}</Button>
+            </Box>
         </Flex>
     )
 }
