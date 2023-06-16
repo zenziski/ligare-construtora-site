@@ -1,149 +1,150 @@
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-      "Comfortaa", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      monospace;
-  }
-  
-  @font-face {
-    font-family: Comfortaa-Bold;
-    src: url("../../public/fonts/Comfortaa-Bold.ttf");
-  }
-  
-  @font-face {
-    font-family: Comfortaa-Light;
-    src: url("../../public/fonts/Comfortaa-Light.ttf");
-  }
-  
-  @font-face {
-    font-family: Comfortaa-Medium;
-    src: url("../../public/fonts/Comfortaa-Medium.ttf");
-  }
-  
-  @font-face {
-    font-family: Comfortaa-Regular;
-    src: url("../../public/fonts/Comfortaa-Regular.ttf");
-  }
-  
-  @font-face {
-    font-family: Comfortaa-SemiBold;
-    src: url("../../public/fonts/Comfortaa-SemiBold.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-Black;
-    src: url("../../public/fonts/Poppins-Black.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-BlackItalic;
-    src: url("../../public/fonts/Poppins-BlackItalic.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-Bold;
-    src: url("../../public/fonts/Poppins-Bold.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-BoldItalic;
-    src: url("../../public/fonts/Poppins-BoldItalic.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-ExtraBold;
-    src: url("../../public/fonts/Poppins-ExtraBold.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-ExtraBoldItalic;
-    src: url("../../public/fonts/Poppins-ExtraBoldItalic.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-ExtraLight;
-    src: url("../../public/fonts/Poppins-ExtraLight.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-ExtraLightItalic;
-    src: url("../../public/fonts/Poppins-ExtraLightItalic.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-Italic;
-    src: url("../../public/fonts/Poppins-Italic.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-Light;
-    src: url("../../public/fonts/Poppins-Light.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-LightItalic;
-    src: url("../../public/fonts/Poppins-LightItalic.ttf");
-  }
-  @font-face {
-    font-family: Poppins-Medium;
-    src: url("../../public/fonts/Poppins-Medium.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-MediumItalic;
-    src: url("../../public/fonts/Poppins-MediumItalic.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-Regular;
-    src: url("../../public/fonts/Poppins-Regular.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-SemiBold;
-    src: url("../../public/fonts/Poppins-SemiBold.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-SemiBoldItalic;
-    src: url("../../public/fonts/Poppins-SemiBoldItalic.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-Thin;
-    src: url("../../public/fonts/Poppins-Thin.ttf");
-  }
-  
-  @font-face {
-    font-family: Poppins-ThinItalic;
-    src: url("../../public/fonts/Poppins-ThinItalic.ttf");
-  }
-  
-  
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body::-webkit-scrollbar-track {
-    background-color: #f2f0f4;
-  }
-  body::-webkit-scrollbar {
-    width: 8px;
-  }
-  body::-webkit-scrollbar-thumb {
-   
-    background-color: #0263FF;
-  }
-  
-  body::-webkit-scrollbar-thumb:hover {
-    background: #004CC6;
-  }
-  
-  
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    "Comfortaa", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@font-face {
+  font-family: Comfortaa-Bold;
+  src: url("../../public/fonts/Comfortaa-Bold.ttf");
+}
+
+@font-face {
+  font-family: Comfortaa-Light;
+  src: url("../../public/fonts/Comfortaa-Light.ttf");
+}
+
+@font-face {
+  font-family: Comfortaa-Medium;
+  src: url("../../public/fonts/Comfortaa-Medium.ttf");
+}
+
+@font-face {
+  font-family: Comfortaa-Regular;
+  src: url("../../public/fonts/Comfortaa-Regular.ttf");
+}
+
+@font-face {
+  font-family: Comfortaa-SemiBold;
+  src: url("../../public/fonts/Comfortaa-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Black;
+  src: url("../../public/fonts/Poppins-Black.ttf");
+}
+
+@font-face {
+  font-family: Poppins-BlackItalic;
+  src: url("../../public/fonts/Poppins-BlackItalic.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url("../../public/fonts/Poppins-Bold.ttf");
+}
+
+@font-face {
+  font-family: Poppins-BoldItalic;
+  src: url("../../public/fonts/Poppins-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: Poppins-ExtraBold;
+  src: url("../../public/fonts/Poppins-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: Poppins-ExtraBoldItalic;
+  src: url("../../public/fonts/Poppins-ExtraBoldItalic.ttf");
+}
+
+@font-face {
+  font-family: Poppins-ExtraLight;
+  src: url("../../public/fonts/Poppins-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: Poppins-ExtraLightItalic;
+  src: url("../../public/fonts/Poppins-ExtraLightItalic.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Italic;
+  src: url("../../public/fonts/Poppins-Italic.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Light;
+  src: url("../../public/fonts/Poppins-Light.ttf");
+}
+
+@font-face {
+  font-family: Poppins-LightItalic;
+  src: url("../../public/fonts/Poppins-LightItalic.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url("../../public/fonts/Poppins-Medium.ttf");
+}
+
+@font-face {
+  font-family: Poppins-MediumItalic;
+  src: url("../../public/fonts/Poppins-MediumItalic.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Regular;
+  src: url("../../public/fonts/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url("../../public/fonts/Poppins-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: Poppins-SemiBoldItalic;
+  src: url("../../public/fonts/Poppins-SemiBoldItalic.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Thin;
+  src: url("../../public/fonts/Poppins-Thin.ttf");
+}
+
+@font-face {
+  font-family: Poppins-ThinItalic;
+  src: url("../../public/fonts/Poppins-ThinItalic.ttf");
+}
+
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+
+}
+
+#root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f5f5f5;
+  overflow: auto;
+}

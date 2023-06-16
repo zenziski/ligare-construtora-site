@@ -1,8 +1,9 @@
 import { Flex, Text, Image, Tooltip } from "@chakra-ui/react";
 import { useState } from "react";
-import Carrosel from "@/pages/admin/carrosel";
+import Galery from "@/components/admin/galery";
 import Dashboard from "./dashboard";
 import UsersPanel from "../pages/Users/UsersPanel";
+import Carousel from "./admin/carousel";
 
 const textLinks = [
     {
@@ -29,7 +30,9 @@ export default function Sidebar() {
     const renderStep = () => {
         switch (step) {
             case 'Galeria':
-                return <Carrosel />
+                return <Galery />
+            case 'Carrossel':
+                return <Carousel />
             default:
                 return <Dashboard />
         }
