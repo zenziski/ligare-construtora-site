@@ -109,7 +109,7 @@ export default function Sidebar() {
                             </Flex>
                             <Flex direction="column" gap={8}>
                                 <Flex justifyContent="center">
-                                    <Text color="white" fontSize="32px" cursor="pointer" onClick={() => setStep('')}>Ligare Admin</Text>
+                                    <Text color="white" fontSize="32px" cursor="pointer" onClick={() => setStep('')}>Ligare</Text>
                                 </Flex>
                             </Flex>
                             <Flex direction="column" mt={8}>
