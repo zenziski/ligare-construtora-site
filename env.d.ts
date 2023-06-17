@@ -1,5 +1,5 @@
 namespace NodeJS {
     interface ProcessEnv {
-        REACT_APP_TAXLY_API: 'https://master.dev.taxly.com.br'
+        REACT_APP_LIGARE_API: 'http://localhost:3001'
     }
 }
