@@ -5,7 +5,14 @@ import { Flex, Text, Card, CardBody, Input, Button, useToast, Image, Box } from 
 export default function Carousel() {
     return (
         <Wrapper title="Carrossel">
-            sad
+            <Box>
+                <Text>
+                    Imagens do carrosel <Button>Editar</Button>
+                </Text>
+                <Box>
+                    Imagens carrosel
+                </Box>
+            </Box>
         </Wrapper>
     )
 

@@ -4,6 +4,7 @@ import Galery from "@/components/admin/galery";
 import Dashboard from "./dashboard";
 import UsersPanel from "../pages/Users/UsersPanel";
 import Carousel from "./admin/carousel";
+import About from "./about";
 
 const textLinks = [
     {
@@ -33,6 +34,8 @@ export default function Sidebar() {
                 return <Galery />
             case 'Carrossel':
                 return <Carousel />
+            case 'Quem somos':
+                return <About />
             default:
                 return <Dashboard />
         }
