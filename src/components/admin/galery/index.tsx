@@ -57,7 +57,7 @@ export default function Galery() {
                                     <GridItem key={index}>
                                         <Card display='flex' alignItems='center' justify='center' height='225px' width='225px' >
                                             <CardHeader w="100%" display="flex" justifyContent="flex-end">
-                                                <Checkbox onChange={() => handleSelectImages(image._id)} />
+                                                <Checkbox isChecked={selectedGaleryImages.includes(image._id)} onChange={() => handleSelectImages(image._id)} />
                                             </CardHeader>
                                             <CardBody>
                                                 <Flex>
