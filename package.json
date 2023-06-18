@@ -33,6 +33,7 @@
     "react-input-mask": "^2.0.4",
     "react-loading": "^2.0.3",
     "react-use-cookie": "^1.4.0",
+    "swiper": "^9.4.1",
     "typescript": "5.0.4",
     "yup": "^0.32.11",
     "yup-locale-pt": "^0.0.9"

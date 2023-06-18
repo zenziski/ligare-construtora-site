@@ -5,6 +5,7 @@ import { Wrapper } from "@/components/wrapper";
 import Axios from 'axios';
 import { AddIcon } from '@chakra-ui/icons'
 import ModalCancel from "@/components/ModalCancel";
+import ModalSliderGalery from "@/components/ModalSliderGalery";
 
 export default function Galery() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -32,8 +33,6 @@ export default function Galery() {
         }
 
         setIsLoading(true)
-
-        // Simulação de carga assíncrona (remova isso no código final)
 
         try {
             const formData = new FormData()
@@ -73,9 +72,6 @@ export default function Galery() {
 
             return
         }
-
-
-
     }
 
     const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
@@ -97,11 +93,15 @@ export default function Galery() {
         setFiles(selectedFiles);
     };
 
-    const handleDeleteImage = () => {
+    const handleDeleteImage = async () => {
         try {
 
-        } catch (error) {
+            const response = await Axios.delete('http://localhost:3001/upload', {
 
+            })
+
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -111,7 +111,6 @@ export default function Galery() {
             const { data } = await Axios.get('http://localhost:3001/upload')
 
             setGaleryImages(data.files)
-
 
         } catch (error) {
             console.log(error);
@@ -132,7 +131,7 @@ export default function Galery() {
                 </Flex>
                 <Flex flexWrap='wrap'>
                     {
-                        galeryImages.map((image: any) => {
+                        galeryImages.map((image: any, index: number) => {
                             return (
                                 <Card key={image._id} m={2}>
                                     <Box
@@ -147,10 +146,13 @@ export default function Galery() {
                                     >
                                         {
                                             isEditing ? (
-                                                <ModalCancel nameImage={image.name} _id={image._id} />
+                                                <ModalCancel nameImage={image.name} _id={image._id} location={image.location} />
                                             ) : null
                                         }
-                                        <Image
+
+                                        <ModalSliderGalery location={image.location} name={image.name} images={galeryImages} initial={index} />
+
+                                        {/* <Image
                                             transition="opacity 0.3s"
                                             _hover={{ opacity: 0.5 }}
                                             src={image.location}
@@ -160,7 +162,7 @@ export default function Galery() {
                                             left="0"
                                             width="100%"
                                             height="100%"
-                                        />
+                                        /> */}
                                     </Box>
                                 </Card>
                             )
