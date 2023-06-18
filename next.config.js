@@ -12,7 +12,7 @@ const nextConfig = {
   //Por algum motivo isso aqui não está pegando o ENV da maquina, enquanto não vemos isso, 
   //Essa informação ficará estática aqui 
   env: {
-    NEXT_PUBLIC_TAXLY_API: "https://master.dev.taxly.com.br"
+    NEXT_PUBLIC_BACKEND_API: "http://localhost:3001"
   },
 }
 module.exports = nextConfig

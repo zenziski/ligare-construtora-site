@@ -106,7 +106,7 @@ export default function Sidebar() {
         <>
             <Flex className="sidebar" fontFamily="Comfortaa-Medium">
                 {isOpen ? (
-                    <Flex id="teste" w="250px" bg="blackAlpha.600" color="white" justifyContent="center" transition="300ms" position="fixed" zIndex={99} left="0px" right="0px" top="0px" bottom="0px" boxShadow="14px 2px 24px -12px rgba(0, 0, 0, 0.32)">
+                    <Flex id="teste" w="250px" bg="gray" color="white" justifyContent="center" transition="300ms" position="fixed" zIndex={99} left="0px" right="0px" top="0px" bottom="0px" boxShadow="14px 2px 24px -12px rgba(0, 0, 0, 0.32)">
                         <Flex direction="column" >
                             <Flex justifyContent="end" transition="300ms" marginTop="20px" w="284px" mt={2} onClick={() => setIsOpen(!isOpen)} _hover={{ cursor: "pointer" }}>
                                 <Flex h={35} w={35} bg="#ecdb19" color="blackAlpha.600" borderRadius="100%" justifyContent="center" alignItems="center">
@@ -126,7 +126,7 @@ export default function Sidebar() {
                             </Flex>
                         </Flex>
                     </Flex>) : (
-                    <Flex w="90px" bg="blackAlpha.600" color="white" position="fixed" zIndex={99} left="0px" right="0px" top="0px" bottom="0px" transition="300ms" boxShadow="14px 2px 24px -12px rgba(0, 0, 0, 0.32)">
+                    <Flex w="90px" bg="gray" color="white" position="fixed" zIndex={99} left="0px" right="0px" top="0px" bottom="0px" transition="300ms" boxShadow="14px 2px 24px -12px rgba(0, 0, 0, 0.32)">
                         <Flex direction="column">
                             <Flex justifyContent="end" mt="10px" transition="300ms" w="104px" onClick={() => setIsOpen(!isOpen)} _hover={{ cursor: "pointer" }}>
                                 <Flex h={35} w={35} bg="#ecdb19" borderRadius="100%" justifyContent="center" alignItems="center">

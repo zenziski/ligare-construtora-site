@@ -3,7 +3,7 @@ import { IDefaultResponse, IErrorResponse, TPremiseResponse } from "./interface/
 
 export const ApiAuth = (token: string, add: object | undefined = undefined) => {
   return {
-    headers: { 
+    headers: {
       Authorization: `Bearer ${token}`,
       ...add
     },
@@ -11,10 +11,9 @@ export const ApiAuth = (token: string, add: object | undefined = undefined) => {
 }
 
 export class ApiCall {
-  base = process.env.NEXT_PUBLIC_TAXLY_API;
+  base = process.env.NEXT_PUBLIC_BACKEND_API;
   currentRoute: string | null = null;
   currentConfig: any | undefined = undefined;
-  admin: boolean | undefined = undefined;
 
   /**
    * Start an API call
@@ -28,12 +27,11 @@ export class ApiCall {
   constructor(route: string, config: AxiosRequestConfig | undefined = undefined, admin = false) {
     this.currentRoute = route;
     this.currentConfig = config;
-    this.admin = admin;
     return this;
   }
 
   private caller(): AxiosInstance {
-    return axios.create({ baseURL: this.admin ? 'https://overseer.dev.taxly.com.br' : this.base, timeout: 300000 });
+    return axios.create({ baseURL: this.base, timeout: 300000 });
   }
 
   private blob(): AxiosInstance {
