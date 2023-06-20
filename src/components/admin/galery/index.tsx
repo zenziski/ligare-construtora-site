@@ -5,7 +5,7 @@ import { Wrapper } from "@/components/wrapper";
 import Axios from 'axios';
 import { AddIcon } from '@chakra-ui/icons'
 import ModalCancel from "@/components/admin/galery/modais/DeleteImages";
-import ModalSliderGalery from "@/components/ModalSliderGalery";
+import Slider from "@/components/admin/galery/modais/Slider";
 import AddFile from "./modais/AddFile";
 import DeleteImages from "./modais/DeleteImages";
 
@@ -60,8 +60,8 @@ export default function Galery() {
                                                 <Checkbox isChecked={selectedGaleryImages.includes(image._id)} onChange={() => handleSelectImages(image._id)} />
                                             </CardHeader>
                                             <CardBody>
-                                                <Flex>
-                                                    <Image h="150px" w="100%" src={image.location} alt="Imagem" />
+                                                <Flex >
+                                                    <Slider location={image.location} name={image.name} images={galeryImages} initial={index} />
                                                 </Flex>
                                             </CardBody>
                                         </Card>
@@ -70,7 +70,6 @@ export default function Galery() {
                             })
                         }
                     </Grid>
-
                 </Flex>
             </Flex>
         </Wrapper>
