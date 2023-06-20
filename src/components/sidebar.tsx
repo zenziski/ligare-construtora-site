@@ -5,7 +5,6 @@ import Dashboard from "./dashboard";
 import UsersPanel from "../pages/Users/UsersPanel";
 import Carousel from "./admin/carousel";
 import About from "./admin/about";
-import ReactQuill from 'react-quill';
 
 const textLinks = [
     {
