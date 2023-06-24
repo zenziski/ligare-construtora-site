@@ -3,7 +3,11 @@ import { Flex, Text, Image, Tooltip } from "@chakra-ui/react";
 import { useState } from "react";
 import Galery from "@/components/admin/galery";
 import Dashboard from "./dashboard";
+<<<<<<< Updated upstream
 import Carousel from "./admin/carousel";
+=======
+import Home from "./admin/home";
+>>>>>>> Stashed changes
 import About from "./admin/about";
 
 const textLinks = [
@@ -12,8 +16,8 @@ const textLinks = [
         image: "/icons/galery.svg"
     },
     {
-        name: "Carrossel",
-        image: "/icons/carousel.svg"
+        name: "Home",
+        image: "/icons/home.svg"
     },
     {
         name: "Quem somos",
@@ -32,8 +36,8 @@ export default function Sidebar() {
         switch (step) {
             case 'Galeria':
                 return <Galery />
-            case 'Carrossel':
-                return <Carousel />
+            case 'Home':
+                return <Home />
             case 'Quem somos':
                 return <About />
             default:

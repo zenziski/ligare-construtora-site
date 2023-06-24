@@ -41,7 +41,7 @@ export default function Login() {
     if (/*status === 200*/ true) {
       // const token = (response as any).accessToken;
       // setCookie("token", token, { path: "/", sameSite: "lax" });
-      router.push('/dashboard');
+      router.push('/admin/dashboard');
     } else {
       toast({
         title: 'Email ou senha incorretos',
