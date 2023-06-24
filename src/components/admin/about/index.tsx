@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { Wrapper } from "@/components/wrapper"
 import { Flex, Text, Card, CardBody, Input, Button, useToast, Image, Box, Textarea } from "@chakra-ui/react"
-import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import RichTextEditor from "@/components/RichTextEditor";
 

@@ -1,8 +1,8 @@
+'use client'
 import { Flex, Text, Image, Tooltip } from "@chakra-ui/react";
 import { useState } from "react";
 import Galery from "@/components/admin/galery";
 import Dashboard from "./dashboard";
-import UsersPanel from "../pages/Users/UsersPanel";
 import Carousel from "./admin/carousel";
 import About from "./admin/about";
 

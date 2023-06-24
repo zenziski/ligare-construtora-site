@@ -1,7 +1,6 @@
 import { Box } from '@chakra-ui/react';
-import ReactQuill from 'react-quill';
+const ReactQuill = typeof window === 'object' ? require('react-quill') : () => false;
 import 'react-quill/dist/quill.snow.css';
-
 const RichTextEditor = ({ value, onChange }: any) => {
     const handleChange = (content: any) => {
         onChange(content);
