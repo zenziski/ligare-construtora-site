@@ -25,9 +25,6 @@ export default function About() {
                     <Text mb={3}>
                         Texto de Descrição:
                     </Text>
-                    <RichTextEditor
-                        value={content} onChange={handleContentChange}
-                    />
                 </Box>
             </Wrapper>
 

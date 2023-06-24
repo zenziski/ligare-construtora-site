@@ -3,7 +3,7 @@ import { Flex, Text, Image, Tooltip } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Galery from "@/components/admin/galery";
 import Dashboard from "./dashboard";
-import Carousel from "./admin/carousel";
+import Home from "./admin/home";
 import About from "./admin/about";
 import { useCookies } from "react-cookie";
 import { useValidation } from "@/_hooks/useValidate";
@@ -14,8 +14,8 @@ const textLinks = [
         image: "/icons/galery.svg"
     },
     {
-        name: "Carrossel",
-        image: "/icons/carousel.svg"
+        name: "Home",
+        image: "/icons/home.svg"
     },
     {
         name: "Quem somos",
@@ -45,8 +45,8 @@ export default function Sidebar() {
         switch (step) {
             case 'Galeria':
                 return <Galery />
-            case 'Carrossel':
-                return <Carousel />
+            case 'Home':
+                return <Home />
             case 'Quem somos':
                 return <About />
             default:
