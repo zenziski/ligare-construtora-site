@@ -1,9 +1,13 @@
-import { ApiCall } from "./api";
+import { ApiAuth, ApiCall } from "./api";
 
-export const deleteImages = async (data: any): Promise<any> => {
-    return await new ApiCall('/upload').put<any, any>({ ids: data });
+export const deleteImages = async (data: any, token: string): Promise<any> => {
+    return await new ApiCall('/upload', ApiAuth(token)).put<any, any>({ ids: data });
 }
 
-export const getImages = async (): Promise<any> => {
-    return await new ApiCall('/upload').get<any>()
+export const getImages = async (token: string): Promise<any> => {
+    return await new ApiCall('/upload', ApiAuth(token)).get<any>()
+}
+
+export const addImages = async (data: any, token: string): Promise<any> => {
+    return await new ApiCall('/upload', ApiAuth(token, { 'Content-Type': 'multipart/form-data' })).post<any, any>(data)
 }

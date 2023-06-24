@@ -33,9 +33,7 @@ export default function Sidebar() {
     const sysValidation = useValidation();
 
     const validateLogin = async () => {
-        await sysValidation(async (token: string) => {
-            console.log("NOT_VALIDATED");
-        });
+        await sysValidation(async (token: string) => {});
     }
     useEffect(() => {
         validateLogin();

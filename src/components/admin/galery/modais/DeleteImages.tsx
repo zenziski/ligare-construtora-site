@@ -1,3 +1,4 @@
+import { useValidation } from '@/_hooks/useValidate';
 import { deleteImages } from '@/_services/galery.service'
 import { DeleteIcon } from '@chakra-ui/icons'
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Button, useToast } from '@chakra-ui/react'
@@ -12,6 +13,7 @@ export default function DeleteImages(props: ModalCancelProps) {
     const { isOpen, onClose, onOpen } = useDisclosure()
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const toastIdRef = useRef<any>()
+    const sysValidation = useValidation();
     const toast = useToast();
     const deleteGaleryImages = async () => {
         setIsLoading(true)
@@ -23,17 +25,19 @@ export default function DeleteImages(props: ModalCancelProps) {
             isClosable: true
         })
         try {
-            await deleteImages(props.imagesToDelete);
-            if (toastIdRef.current) {
-                toast.close(toastIdRef.current)
-            }
-            toast({
-                title: 'Imagens deletadas.',
-                description: 'As imagens foram deletadas.',
-                status: 'success',
-                duration: 5000,
-                isClosable: true
-            })
+            await sysValidation(async (token: string) => {
+                await deleteImages(props.imagesToDelete, token);
+                if (toastIdRef.current) {
+                    toast.close(toastIdRef.current)
+                }
+                toast({
+                    title: 'Imagens deletadas.',
+                    description: 'As imagens foram deletadas.',
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true
+                })
+            });
         } catch (error) {
             console.log(error);
             if (toastIdRef.current) {

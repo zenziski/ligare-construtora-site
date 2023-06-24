@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, use } from "react"
 import { Flex, Text, Card, Input, Button, useToast, Image, Box, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Checkbox, Grid, GridItem, CardHeader, CardBody } from "@chakra-ui/react"
 import MiniLoading from "@/components/miniLoading"
 import { Wrapper } from "@/components/wrapper";
@@ -8,18 +8,25 @@ import ModalCancel from "@/components/admin/galery/modais/DeleteImages";
 import Slider from "@/components/admin/galery/modais/Slider";
 import AddFile from "./modais/AddFile";
 import DeleteImages from "./modais/DeleteImages";
+import { getImages } from "@/_services/galery.service";
+import { useValidation } from "@/_hooks/useValidate";
 
 export default function Galery() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [galeryImages, setGaleryImages] = useState([]);
     const [refresh, setRefresh] = useState<boolean>(false);
     const [selectedGaleryImages, setSelectedGaleryImages] = useState<any>([])
+    const sysValidation = useValidation();
     const toast = useToast();
 
     const fetchData = async () => {
         try {
-            const { data } = await Axios.get('http://localhost:3001/upload')
-            setGaleryImages(data.files)
+            await sysValidation(async (token: string) => {
+                setIsLoading(true);
+                const response = await getImages(token)
+                setGaleryImages(response.files)
+                setIsLoading(false);
+            });
         } catch (error) {
             console.log(error);
         }
@@ -34,6 +41,7 @@ export default function Galery() {
     }
 
     useEffect(() => {
+        setRefresh(false);
         setSelectedGaleryImages([]);
         fetchData()
     }, [refresh])
@@ -41,6 +49,10 @@ export default function Galery() {
     useEffect(() => {
         fetchData()
     }, [])
+
+    useEffect(() => {
+        console.log(galeryImages)
+    }, [galeryImages])
 
     return (
         <Wrapper title="Galeria">
