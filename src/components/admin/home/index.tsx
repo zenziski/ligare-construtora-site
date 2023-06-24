@@ -18,6 +18,7 @@ export default function Home() {
     }
 
     useEffect(() => {
+        setRefresh(false)
         fetchData()
     }, [refresh])
 
@@ -31,5 +32,4 @@ export default function Home() {
             </Box>
         </Wrapper>
     )
-
 }

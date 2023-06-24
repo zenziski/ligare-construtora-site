@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AddIcon } from "@chakra-ui/icons";
 import { Button, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, Box, Checkbox } from "@chakra-ui/react";
 import { getImages } from "@/_services/galery.service";
+import { useValidation } from "@/_hooks/useValidate";
 
 interface ModalSaveImagesProps {
     flushHook: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,11 +13,14 @@ export default function SelectImages(props: ModalSaveImagesProps) {
     const [images, setImages] = useState<any>([])
     const [selectedImages, setSelectedImages] = useState<any>([])
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const sysValidation = useValidation()
 
     const handleImages = async () => {
 
-        const response = await getImages()
-        setImages(response.files)
+        await sysValidation(async (token: string) => {
+            const response = await getImages(token)
+            setImages(response.files)
+        })
     }
 
     const handleSelectImages = (_id: string) => {
@@ -31,7 +35,6 @@ export default function SelectImages(props: ModalSaveImagesProps) {
         setSelectedImages([])
         onClose()
         props.flushHook(true)
-        handleImages()
     }
 
     useEffect(() => {
