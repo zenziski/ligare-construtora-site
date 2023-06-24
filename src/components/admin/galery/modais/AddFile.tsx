@@ -3,6 +3,8 @@ import { Flex, Text, Card, Input, Button, useToast, Box, Modal, ModalOverlay, Mo
 import MiniLoading from "@/components/miniLoading"
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import Axios from "axios";
+import { addImages } from "@/_services/galery.service";
+import { useValidation } from "@/_hooks/useValidate";
 
 interface IAddFileProps {
     flushHook: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,6 +15,7 @@ export default function AddFile(props: IAddFileProps) {
     const [files, setFiles] = useState<File[]>([]);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const sysValidation = useValidation();
 
     const toast = useToast();
 
@@ -33,22 +36,19 @@ export default function AddFile(props: IAddFileProps) {
             files.forEach((image: any, index: any) => {
                 formData.append('files', image);
             })
-            await Axios.post(`${process.env.NEXT_PUBLIC_BACKEND_API}/upload`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                }
+            await sysValidation(async (token: string) => {
+                await addImages(formData, token);
+                setFiles([]); // Limpar o arquivo selecionado após o upload
+                setIsLoading(false)
+                toast({
+                    title: 'Sucesso',
+                    description: `Arquivo enviado com sucesso`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true
+                })
+                props.flushHook(true)
             });
-            setFiles([]); // Limpar o arquivo selecionado após o upload
-            setIsLoading(false)
-
-            toast({
-                title: 'Sucesso',
-                description: `Arquivo enviado com sucesso`,
-                status: 'success',
-                duration: 5000,
-                isClosable: true
-            })
-            props.flushHook(true)
         } catch (error) {
             toast({
                 title: 'Erro',
@@ -111,7 +111,7 @@ export default function AddFile(props: IAddFileProps) {
                                 <Text fontSize="xl" mb={4} fontFamily="Poppins-Medium">
                                     Arraste e solte as imagens aqui
                                 </Text>
-                                <Image src="./icons/download.svg" w={40} h={40} mt="-20px" />
+                                <Image src="../icons/download.svg" w={40} h={40} mt="-20px" />
                             </Flex>
                             <Input
                                 type="file"
