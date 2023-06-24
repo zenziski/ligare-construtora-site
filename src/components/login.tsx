@@ -31,17 +31,13 @@ export default function Login() {
         duration: 5000,
         isClosable: true
       })
-
       return
     }
-
     setIsLoading(true);
-    const { status, response } = await postLogin(loginData);
-    console.log(status);
-    if (/*status === 200*/ true) {
-      // const token = (response as any).accessToken;
-      // setCookie("token", token, { path: "/", sameSite: "lax" });
-      router.push('/dashboard');
+    const response = await postLogin(loginData);
+    if (response.token) {
+      setCookie("token", response.token, { path: "/", sameSite: "lax" });
+      router.push('/admin/dashboard');
     } else {
       toast({
         title: 'Email ou senha incorretos',
@@ -56,7 +52,7 @@ export default function Login() {
 
   useEffect(() => {
     if (cookies.token) {
-      router.push('/dashboard')
+      router.push('/admin/dashboard')
     }
   }, [])
   return (

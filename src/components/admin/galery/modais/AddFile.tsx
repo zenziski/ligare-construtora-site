@@ -111,7 +111,7 @@ export default function AddFile(props: IAddFileProps) {
                                 <Text fontSize="xl" mb={4} fontFamily="Poppins-Medium">
                                     Arraste e solte as imagens aqui
                                 </Text>
-                                <Image src="./icons/download.svg" w={40} h={40} mt="-20px" />
+                                <Image src="../icons/download.svg" w={40} h={40} mt="-20px" />
                             </Flex>
                             <Input
                                 type="file"

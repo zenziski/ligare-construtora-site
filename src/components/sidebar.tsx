@@ -1,10 +1,12 @@
 'use client'
 import { Flex, Text, Image, Tooltip } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Galery from "@/components/admin/galery";
 import Dashboard from "./dashboard";
 import Carousel from "./admin/carousel";
 import About from "./admin/about";
+import { useCookies } from "react-cookie";
+import { useValidation } from "@/_hooks/useValidate";
 
 const textLinks = [
     {
@@ -28,6 +30,17 @@ const textLinks = [
 export default function Sidebar() {
     const [step, setStep] = useState<string>("")
     const [isOpen, setIsOpen] = useState<boolean>(true)
+    const sysValidation = useValidation();
+
+    const validateLogin = async () => {
+        await sysValidation(async (token: string) => {
+            console.log("NOT_VALIDATED");
+        });
+    }
+    useEffect(() => {
+        validateLogin();
+    }, [])
+
     const renderStep = () => {
         switch (step) {
             case 'Galeria':
@@ -40,14 +53,6 @@ export default function Sidebar() {
                 return <Dashboard />
         }
     }
-
-    /* const LinkText = (text: string) => {
-        return (
-            <Text p={2} transition={'background-color 0.3s ease'} _hover={{ bgColor: '#ecdb19' }} color="black" fontWeight='semibold' fontSize="16px" cursor="pointer" onClick={() => setStep(text)}>
-                {text}
-            </Text>
-        )
-    } */
 
     interface IMenuItemProps {
         onClick: any;
