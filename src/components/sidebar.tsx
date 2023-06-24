@@ -4,7 +4,7 @@ import Galery from "@/components/admin/galery";
 import Dashboard from "./dashboard";
 import UsersPanel from "../pages/Users/UsersPanel";
 import Carousel from "./admin/carousel";
-import About from "./about";
+import About from "./admin/about";
 
 const textLinks = [
     {

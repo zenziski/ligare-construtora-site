@@ -6,13 +6,13 @@ import 'swiper/swiper-bundle.min.css';
 SwiperCore.use([Navigation, Pagination]);
 
 interface ModalSliderGalleryProps {
-  location: string;
-  name: string;
-  images: { location: string; name: string; }[];
-  initial: number;
+    location: string;
+    name: string;
+    images: { location: string; name: string; }[];
+    initial: number;
 }
 
-export default function ModalSliderGalery({ location, name, images, initial }: ModalSliderGalleryProps) {
+export default function Slider({ location, name, images, initial }: ModalSliderGalleryProps) {
 
     const { isOpen, onClose, onOpen } = useDisclosure();
     return (
@@ -23,12 +23,9 @@ export default function ModalSliderGalery({ location, name, images, initial }: M
                 _hover={{ opacity: 0.5 }}
                 src={location}
                 alt={name}
-                position="absolute"
-                top="0"
-                left="0"
-                width="100%"
-                height="100%"
+                h="150px" w="100%"
                 onClick={onOpen}
+                cursor='pointer'
             />
 
             <Modal isOpen={isOpen} onClose={onClose}>
