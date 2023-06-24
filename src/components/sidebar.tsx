@@ -3,11 +3,7 @@ import { Flex, Text, Image, Tooltip } from "@chakra-ui/react";
 import { useState } from "react";
 import Galery from "@/components/admin/galery";
 import Dashboard from "./dashboard";
-<<<<<<< Updated upstream
-import Carousel from "./admin/carousel";
-=======
 import Home from "./admin/home";
->>>>>>> Stashed changes
 import About from "./admin/about";
 
 const textLinks = [
