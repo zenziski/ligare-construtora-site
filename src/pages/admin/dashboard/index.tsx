@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { ApiAuth, ApiCall } from "../../_services/api";
+import { ApiAuth, ApiCall } from "../../../_services/api";
 import { useToast } from "@chakra-ui/react";
 import { useRouter } from 'next/router'
 import Sidebar from "@/components/sidebar";
