@@ -23,7 +23,7 @@ export default function About() {
         <Flex direction='column' width='100%' >
             <Wrapper title="Quem somos">
                 <Box>
-                    <Text>
+                    <Text mb={3}>
                         Texto de Descrição:
                     </Text>
                     <RichTextEditor
@@ -31,10 +31,15 @@ export default function About() {
                     />
                 </Box>
             </Wrapper>
-            <Box>
-                <Text dangerouslySetInnerHTML={{ __html: content }} />
 
-            </Box>
+            <Wrapper title="Preview" >
+                <Flex justifyContent='space-between'>
+                    <Text dangerouslySetInnerHTML={{ __html: content }} />
+                    <Box>
+                        Slider
+                    </Box>
+                </Flex>
+            </Wrapper>
         </Flex>
 
     )
