@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { AddIcon } from "@chakra-ui/icons";
-import { Button, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, Box, Checkbox } from "@chakra-ui/react";
+import { Button, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, Box, Checkbox, useToast } from "@chakra-ui/react";
 import { getImages } from "@/_services/galery.service";
+import { postImagesHome } from "@/_services/home.service";
 import { useValidation } from "@/_hooks/useValidate";
 
 interface ModalSaveImagesProps {
@@ -14,6 +15,7 @@ export default function SelectImages(props: ModalSaveImagesProps) {
     const [selectedImages, setSelectedImages] = useState<any>([])
     const { isOpen, onOpen, onClose } = useDisclosure()
     const sysValidation = useValidation()
+    const toast = useToast()
 
     const handleImages = async () => {
 
@@ -23,18 +25,42 @@ export default function SelectImages(props: ModalSaveImagesProps) {
         })
     }
 
-    const handleSelectImages = (_id: string) => {
-        if (selectedImages.includes(_id)) {
-            setSelectedImages(selectedImages.filter((item: string) => item !== _id))
+    const handleSelectImages = (location: string) => {
+        if (selectedImages.includes(location)) {
+            setSelectedImages(selectedImages.filter((item: string) => item !== location))
         } else {
-            setSelectedImages([...selectedImages, _id])
+            setSelectedImages([...selectedImages, location])
         }
     }
 
-    const handleSave = () => {
-        setSelectedImages([])
-        onClose()
-        props.flushHook(true)
+    const handleSave = async () => {
+
+        try {
+
+            await sysValidation(async (token: string) => {
+                await postImagesHome({ images: selectedImages }, token)
+            })
+            toast({
+                title: 'Sucesso',
+                description: 'Sucesso ao salvar as imagens',
+                status: 'success',
+                duration: 5000,
+                isClosable: true
+            })
+
+            setSelectedImages([])
+            onClose()
+            props.flushHook(true)
+        } catch (error) {
+            toast({
+                title: 'Erro',
+                description: 'Ocorreu algum erro ao salvar as imagens.',
+                status: 'error',
+                duration: 5000,
+                isClosable: true
+            })
+            console.log(error);
+        }
     }
 
     useEffect(() => {
@@ -59,7 +85,7 @@ export default function SelectImages(props: ModalSaveImagesProps) {
                                     return (
                                         <Card m={1} p={2}>
                                             <Flex justifyContent='flex-end'>
-                                                <Checkbox isChecked={selectedImages.includes(image._id)} onChange={() => handleSelectImages(image._id)} m={2} position='absolute' />
+                                                <Checkbox isChecked={selectedImages.includes(image.location)} onChange={() => handleSelectImages(image.location)} m={2} position='absolute' />
                                             </Flex>
                                             <Image width='180px' height='180px' src={image.location} />
                                         </Card>
