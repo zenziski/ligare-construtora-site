@@ -6,9 +6,9 @@ import 'swiper/swiper-bundle.min.css';
 SwiperCore.use([Navigation, Pagination]);
 
 interface SliderProps {
-    images: String[],
-    title: String,
-    description: String
+    images: string[],
+    title: string,
+    description: string
 }
 
 export default function HomePreview(props: SliderProps) {
