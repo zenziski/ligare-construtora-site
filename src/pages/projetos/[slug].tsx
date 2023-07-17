@@ -28,7 +28,7 @@ export default function Projeto() {
         ]
     }
     return (
-        <Ligare image={image} title="Projeto">
+        slug && <Ligare image={image} title="Projeto">
             <Flex mt="85px" mb="85px" direction="column" gap={6}>
                 <Flex w="100%">
                     <Image src={image} w="30%" ml="100px" />
