@@ -16,7 +16,7 @@ const HeaderMenu = ({ location, padding }: { location: string, padding: string }
 export default function Header(props: { image: string }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [isMobile, setIsMobile] = useState<Boolean>(false);
+    const [isMobile, setIsMobile] = useState<boolean>(false);
 
     const handleResize = () => {
         setIsMobile(window.innerWidth <= 768); // Defina o ponto de interrupção para dispositivos móveis conforme necessário
