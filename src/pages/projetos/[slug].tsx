@@ -1,6 +1,5 @@
 import Ligare from "@/components/Ligare";
-import Slider from "@/components/admin/galery/modais/Slider";
-import { Flex, Text, Image } from "@chakra-ui/react";
+import { Flex, Text, Image, useBreakpointValue, Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 export default function Projeto() {
@@ -27,39 +26,43 @@ export default function Projeto() {
             { location: '/imgs/home1.jpg', name: 'Imagem 4' },
         ]
     }
+
+    const isLargeScreen = useBreakpointValue({ base: false, lg: true });
+
     return (
         slug && <Ligare image={image} title="Projeto">
             <Flex mt="85px" mb="85px" direction="column" gap={6}>
-                <Flex w="100%">
-                    <Image src={image} w="30%" ml="100px" />
-                    <Flex direction="column" alignItems="flex-end" w="60%">
+                <Flex w="100%" flexWrap="wrap">
+                    <Image src={image} w="100%" maxW={isLargeScreen ? "30%" : "100%"} ml={isLargeScreen ? "100px" : 0} mb={isLargeScreen ? 0 : "20px"} />
+                    <Flex direction="column" alignItems={isLargeScreen ? "flex-end" : 'center'} w={isLargeScreen ? "60%" : '100%'}>
                         <Text as="h1" fontFamily="Poppins-Bold" p={4} fontSize="64px" className="underline-text-heading-right">Projeto</Text>
                         <Text w="90%" fontFamily="Poppins-Medium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quod libero beatae nobis accusamus aperiam fugiat numquam, nesciunt pariatur incidunt quis error harum odio voluptas voluptatibus mollitia sapiente? Consequuntur non dolor odit debitis unde aliquid ea, doloremque voluptas ipsam modi incidunt, optio vel possimus quia natus necessitatibus sit. Dolorem, excepturi?</Text>
                     </Flex>
                 </Flex>
-                <Flex w="100%" mb="25px">
-                    <Flex ml="100px" direction="column" alignItems="flex-start" w="60%">
-                        <Text as="h1" fontFamily="Poppins-Bold" p={4} fontSize="64px" className="underline-text-heading-left">Inspirações</Text>
+                <Flex w="100%" mb="25px" flexWrap='wrap'>
+                    <Flex ml={isLargeScreen ? "100px" : 0} mb={isLargeScreen ? 0 : "20px"} direction="column" alignItems={isLargeScreen ? "flex-start" : 'center'} w={isLargeScreen ? "55%" : '100%'}>
+                        <Text as="h1" fontFamily="Poppins-Bold" p={4} fontSize={isLargeScreen ? "64px" : '50px'} className="underline-text-heading-left" >Inspirações</Text>
                         <Text w="90%" fontFamily="Poppins-Medium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam quod libero beatae nobis accusamus aperiam fugiat numquam, nesciunt pariatur incidunt quis error harum odio voluptas voluptatibus mollitia sapiente? Consequuntur non dolor odit debitis unde aliquid ea, doloremque voluptas ipsam modi incidunt, optio vel possimus quia natus necessitatibus sit. Dolorem, excepturi?</Text>
                     </Flex>
-                    <Image src={image} w="30%" mr="100px" />
+                    <Image src={image} w={isLargeScreen ? '28%' : '100%'} mr="100px" />
                 </Flex>
-                <Flex w="100%" direction="row" pl="100px" pr="100px" gap={4}>
-                    <Image src={images[slug as keyof typeof images][0].location} w="20%" />
-                    <Image src={images[slug as keyof typeof images][0].location} w="50%" />
-                    <Image src={images[slug as keyof typeof images][0].location} w="30%" />
+                <Flex w="100%" direction="row" pl={isLargeScreen ? "100px" : '5px'} pr={isLargeScreen ? "100px" : '5px'} gap={4} flexWrap={isLargeScreen ? 'nowrap' : 'wrap'} >
+                    <Image src={images[slug as keyof typeof images][0].location} w={isLargeScreen ? "20%" : '100%'} />
+                    <Image src={images[slug as keyof typeof images][0].location} w={isLargeScreen ? "50%" : '45%'} />
+                    <Image src={images[slug as keyof typeof images][0].location} w={isLargeScreen ? "30%" : '45%'} />
                 </Flex>
-                <Flex w="100%" direction="row" pl="100px" pr="100px" gap={4}>
-                    <Image src={images[slug as keyof typeof images][0].location} w="50%" />
-                    <Image src={images[slug as keyof typeof images][0].location} w="30%" />
-                    <Image src={images[slug as keyof typeof images][0].location} w="20%" />
+                <Flex w="100%" direction="row" pl={isLargeScreen ? "100px" : '5px'} pr={isLargeScreen ? "100px" : '5px'} gap={4} flexWrap={isLargeScreen ? 'nowrap' : 'wrap'}>
+                    <Image src={images[slug as keyof typeof images][0].location} w={isLargeScreen ? "50%" : '100%'} />
+                    <Image src={images[slug as keyof typeof images][0].location} w={isLargeScreen ? "30%" : '45%'} />
+                    <Image src={images[slug as keyof typeof images][0].location} w={isLargeScreen ? "20%" : '45%'} />
                 </Flex>
-                <Flex w="100%" direction="row" pl="100px" pr="100px" gap={4}>
-                    <Image src={images[slug as keyof typeof images][0].location} w="30%" />
-                    <Image src={images[slug as keyof typeof images][0].location} w="20%" />
-                    <Image src={images[slug as keyof typeof images][0].location} w="50%" />
+                <Flex w="100%" direction="row" pl={isLargeScreen ? "100px" : '5px'} pr={isLargeScreen ? "100px" : '5px'} gap={4} flexWrap={isLargeScreen ? 'nowrap' : 'wrap'}>
+                    <Image src={images[slug as keyof typeof images][0].location} w={isLargeScreen ? "30%" : '100%'} />
+                    <Image src={images[slug as keyof typeof images][0].location} w={isLargeScreen ? "20%" : '45%'} />
+                    <Image src={images[slug as keyof typeof images][0].location} w={isLargeScreen ? "50%" : '45%'} />
                 </Flex>
             </Flex>
         </Ligare>
     )
 }
+ 

@@ -12,7 +12,7 @@ export default function Home() {
       </Flex>
       <Flex alignItems="center" direction="column" gap={8} mb="100px">
         <Text as="h1" fontFamily="Poppins-Bold" fontSize="32px">Projetos recentes</Text>
-        <Flex direction="row" gap={8}>
+        <Flex direction="row" gap={8} flexWrap='wrap' justifyContent='center' >
           <ProjectCard title="Mahani" description="Engenharia" image="./imgs/home1.jpg" />
           <ProjectCard title="Capri" description="Arquitetura" image="./imgs/home2.jpg" />
           <ProjectCard title="Stephan" description="Arquitetura, Engenharia" image="./imgs/home3.jpg" />

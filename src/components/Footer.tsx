@@ -2,8 +2,8 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 
 export default function Footer() {
     return (
-        <Flex color="white" h="270px" bg="secondary" justifyContent="center" alignItems="center" direction="column">
-            <Flex alignItems="center" gap="100px">
+        <Flex color="white" minH="270px" p={3} bg="secondary" justifyContent="center" alignItems="center" direction="column" >
+            <Flex alignItems="center" gap="100px" flexWrap='wrap' justifyContent='center'>
                 <Image src="/imgs/logo.png" w="80px" h="80px" />
                 <Flex direction="column" fontFamily="Poppins-Regular">
                     <Text>Rua Manoel Amálio de Souza, 168</Text>
