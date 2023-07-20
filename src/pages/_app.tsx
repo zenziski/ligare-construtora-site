@@ -1,6 +1,9 @@
 import { ChakraProvider, extendTheme, keyframes } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import "../styles/index.css";
+import 'swiper/swiper-bundle.min.css';
+import '../pages/obras/swiper.css';
+
 const underlineAnimation = keyframes`
   0% {
     width: 20%;

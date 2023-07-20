@@ -1,0 +1,7 @@
+/* swiper-custom.css */
+
+/* Style the prev/next navigation arrows */
+.swiper-button-prev,
+.swiper-button-next {
+  color: #ecc94b;
+}

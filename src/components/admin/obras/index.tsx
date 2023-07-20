@@ -1,12 +1,9 @@
 
 import { Wrapper } from "@/components/wrapper"
-import { Flex, Text, Divider, Card, CardBody, Input, Button, useToast, Image, Box, Stack, FormControl, FormHelperText, FormLabel, Grid, GridItem } from "@chakra-ui/react"
-import SelectImages from "../home/modais/SelectImages";
+import { Flex, Text, Card, CardBody, Image, Grid, GridItem } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
-import { useValidation } from '@/_hooks/useValidate';
 import NovaObra from "./modais/NovaObra";
 import { getObras } from "@/_services/obras.service";
-import { ArrowRightIcon, DeleteIcon } from "@chakra-ui/icons";
 import EditObra from "./modais/EditObra";
 import DeleteObra from "./modais/DeleteObra";
 

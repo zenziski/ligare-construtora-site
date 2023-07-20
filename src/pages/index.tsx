@@ -30,11 +30,11 @@ export default function Home() {
       <Flex alignItems="center" direction="column" gap={8} mb="100px">
         <Text as="h1" fontFamily="Poppins-Bold" fontSize="32px">O que nós fazemos</Text>
         <Flex direction="row" gap={8} flexWrap='wrap' justifyContent='center' >
-          <ProjectCard title="Reforma" description={data.reforma.name} image={data.reforma.image} />
-          <ProjectCard title="Construção" description={data.construcao.name} image={data.construcao.image} />
-          <ProjectCard title="Projeto" description={data.projeto.name} image={data.projeto.image} />
+          <ProjectCard title="Reforma" description={data.reforma.name} image={data.reforma.images[0]} slug={data.reforma.slug}/>
+          <ProjectCard title="Construção" description={data.construcao.name} image={data.construcao.images[0]} slug={data.construcao.slug} />
+          <ProjectCard title="Projeto" description={data.projeto.name} image={data.projeto.images[0]} slug={data.projeto.slug}/>
         </Flex>
-        <Link href="/projetos">
+        <Link href="/obras">
           <Text fontSize="24px" fontFamily="Poppins-Bold" className="underline-text" cursor="pointer">Ver mais obras</Text>
         </Link>
       </Flex>

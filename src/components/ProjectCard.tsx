@@ -6,11 +6,12 @@ interface ProjectCardProps {
     title: string;
     description: string;
     image: string;
+    slug?: string
 }
 export default function ProjectCard(props: ProjectCardProps) {
     const router = useRouter();
     const handlePage = (slug: string) => {
-        router.push(`/projetos/${slug}`);
+        router.push(`/obras/${slug}`);
     }
     return (
         <Flex direction="column" minW="400px" maxW="400px">
@@ -24,7 +25,7 @@ export default function ProjectCard(props: ProjectCardProps) {
                     p={1}
                     _hover={{ opacity: "0.7", transition: "opacity 0.3s" }}
                     cursor="pointer"
-                    onClick={() => handlePage(createSlug(props.title) as string)}
+                    onClick={() => handlePage(props.slug || createSlug(props.title) as string)}
                 />
             </Box>
             <Box ml={1}>

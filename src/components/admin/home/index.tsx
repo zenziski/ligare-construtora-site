@@ -1,47 +1,31 @@
 
 import { Wrapper } from "@/components/wrapper"
-import { Flex, Text, Divider, Card, CardBody, Input, Button, useToast, Image, Box, Stack, FormControl, FormHelperText, FormLabel, Textarea } from "@chakra-ui/react"
+import { Flex, Text, Button, useToast, Image, FormLabel, Textarea, Select } from "@chakra-ui/react"
 import SelectImages from "./modais/SelectImages"
 import { useEffect, useState } from "react";
 import { useValidation } from '@/_hooks/useValidate';
 import { postHomeData, getDataHome } from "@/_services/home.service";
+import { getObras } from "@/_services/obras.service";
 
 export default function Home() {
     const [description, setDescription] = useState<string>('');
     const [reforma, setReforma] = useState<any>(null);
     const [construcao, setConstrucao] = useState<any>(null);
     const [projeto, setProjeto] = useState<any>(null);
+    const [obras, setObras] = useState<any[]>([])
     const [imagemPrincipal, setImagemPrincipal] = useState<string>('');
     const toast = useToast();
     const sysValidation = useValidation();
 
     const getData = async () => {
+        const obras = await getObras();
+        setObras(obras);
         const response = await getDataHome();
-        console.log(response);
         setDescription(response.description);
         setReforma(response.reform);
         setConstrucao(response.construction);
         setProjeto(response.project);
         setImagemPrincipal(response.imagemPrincipal);
-    }
-
-    const setReformaName = (name: string) => {
-        setReforma({ ...reforma, name: name });
-    }
-    const setReformaImage = (image: string) => {
-        setReforma({ ...reforma, image: image });
-    }
-    const setConstrucaoName = (name: string) => {
-        setConstrucao({ ...construcao, name: name });
-    }
-    const setConstrucaoImage = (image: string) => {
-        setConstrucao({ ...construcao, image: image });
-    }
-    const setProjetoName = (name: string) => {
-        setProjeto({ ...projeto, name: name });
-    }
-    const setProjetoImage = (image: string) => {
-        setProjeto({ ...projeto, image: image });
     }
 
     const handleSave = async () => {
@@ -75,8 +59,12 @@ export default function Home() {
     useEffect(() => {
         getData();
     }, [])
+
+    useEffect(() => {
+        console.log(reforma, construcao, projeto);
+    }, [reforma, construcao, projeto])
     return (
-        <Wrapper title="Home">
+        reforma && construcao && projeto && <Wrapper title="Home">
             <Flex mt={4} width='100%' >
                 <Flex direction="column" w="100%">
                     <Flex direction="column" alignItems="center" gap={2}>
@@ -94,24 +82,42 @@ export default function Home() {
                     </Flex>
                 </Flex>
             </Flex>
-            <Flex mt={30} justifyContent="space-around">
+            <Flex mt={30} justifyContent="space-around" gap={4}>
                 <Flex direction="column" alignItems="center" justifyContent="center" w="100%" h="100%" gap={4} key={1}>
-                    <Text fontSize="18px" fontFamily="Poppins-Medium">Reforma</Text>
-                    <SelectImages setImage={setReformaImage} />
-                    <Image w="250px" h="250px" src={reforma?.image} />
-                    <Input value={reforma?.name} onChange={(e) => setReformaName(e.target.value)} placeholder="Título" w="250px" />
+                    <Text fontFamily="Poppins-Medium" fontSize="18px">Reforma</Text>
+                    <Select value={reforma._id} onChange={(e) => setReforma(e.currentTarget.value)}>
+                        <option value="64b87095c2b4169134de5e8a">Selecione um vinculo (opcional)</option>
+                        {obras.filter((obra) => obra.type === 'reforma').map((obra) => {
+                            return (
+                                <option value={`${obra._id}`}>{obra.name}</option>
+                            )
+                        }
+                        )}
+                    </Select>
                 </Flex>
-                <Flex direction="column" alignItems="center" justifyContent="center" w="100%" h="100%" gap={4} key={2}>
-                    <Text fontSize="18px" fontFamily="Poppins-Medium">Construção</Text>
-                    <SelectImages setImage={setConstrucaoImage} />
-                    <Image w="250px" h="250px" src={construcao?.image} />
-                    <Input value={construcao?.name} onChange={(e) => setConstrucaoName(e.target.value)} placeholder="Título" w="250px" />
+                <Flex direction="column" alignItems="center" justifyContent="center" w="100%" h="100%" gap={4} key={1}>
+                    <Text fontFamily="Poppins-Medium" fontSize="18px">Construção</Text>
+                    <Select value={construcao._id} onChange={(e) => setConstrucao(e.currentTarget.value)}>
+                        <option value="64b87095c2b4169134de5e8a">Selecione um vinculo (opcional)</option>
+                        {obras.filter((obra) => obra.type === 'construcao').map((obra) => {
+                            return (
+                                <option value={`${obra._id}`}>{obra.name}</option>
+                            )
+                        }
+                        )}
+                    </Select>
                 </Flex>
-                <Flex direction="column" alignItems="center" justifyContent="center" w="100%" h="100%" gap={4} key={3}>
-                    <Text fontSize="18px" fontFamily="Poppins-Medium">Projeto</Text>
-                    <SelectImages setImage={setProjetoImage} />
-                    <Image w="250px" h="250px" src={projeto?.image} />
-                    <Input value={projeto?.name} onChange={(e) => setProjetoName(e.target.value)} placeholder="Título" w="250px" />
+                <Flex direction="column" alignItems="center" justifyContent="center" w="100%" h="100%" gap={4} key={1}>
+                    <Text fontFamily="Poppins-Medium" fontSize="18px">Projeto</Text>
+                    <Select value={projeto._id} onChange={(e) => setProjeto(e.currentTarget.value)}>
+                        <option value="64b87095c2b4169134de5e8a">Selecione um vinculo (opcional)</option>
+                        {obras.filter((obra) => obra.type === 'projeto').map((obra) => {
+                            return (
+                                <option value={`${obra._id}`}>{obra.name}</option>
+                            )
+                        }
+                        )}
+                    </Select>
                 </Flex>
             </Flex>
             <Flex mt={3}>
