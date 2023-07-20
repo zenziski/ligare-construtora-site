@@ -17,7 +17,7 @@ export default function Projetos() {
     const isLargeScreen = useBreakpointValue({ base: false, lg: true });
     return (
         data && <Ligare image="./imgs/home2.jpg" title="Sobre Nós">
-            <Flex mt="45px" mb="85px" pl={10} pr={10} direction="row" gap={6}>
+            <Flex mt="45px" mb="85px" pl={10} pr={10} direction="row" gap={6} flexWrap={isLargeScreen ? 'nowrap' : 'wrap'}>
                 <Flex direction="column" w="70%">
                     <Flex w="100%">
                         <Flex direction="column" alignItems="flex-start" w="100%">
@@ -32,7 +32,7 @@ export default function Projetos() {
                         </Flex>
                     </Flex>
                 </Flex>
-                <Image src={data.imagemPrincipal} w="60%" />
+                <Image src={data.imagemPrincipal} w={isLargeScreen ? "60%" : "100%" }/>
             </Flex>
         </Ligare>
     )
