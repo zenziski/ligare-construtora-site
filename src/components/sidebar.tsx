@@ -7,6 +7,7 @@ import Home from "./admin/home";
 import About from "./admin/about";
 import { useCookies } from "react-cookie";
 import { useValidation } from "@/_hooks/useValidate";
+import Obras from "./admin/obras";
 
 const textLinks = [
     {
@@ -16,6 +17,10 @@ const textLinks = [
     {
         name: "Home",
         image: "/icons/home.svg"
+    },
+    {
+        name: "Obras",
+        image: "/icons/dashboard.svg"
     },
     {
         name: "Quem somos",
@@ -47,6 +52,8 @@ export default function Sidebar() {
                 return <Galery />
             case 'Home':
                 return <Home />
+            case 'Obras':
+                return <Obras />
             case 'Quem somos':
                 return <About />
             default:

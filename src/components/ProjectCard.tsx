@@ -13,7 +13,7 @@ export default function ProjectCard(props: ProjectCardProps) {
         router.push(`/projetos/${slug}`);
     }
     return (
-        <Flex direction="column" maxW="430px">
+        <Flex direction="column" minW="400px" maxW="400px">
             <Box position="relative" h="300px">
                 <Image
                     src={props.image}

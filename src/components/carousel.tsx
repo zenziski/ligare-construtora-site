@@ -1,20 +1,10 @@
-import { Box, Flex, Image, IconButton } from "@chakra-ui/react";
+import { Box, Flex, Image, IconButton, Link } from "@chakra-ui/react";
 import { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
-export default function Carousel() {
+export default function Carousel(props: any) {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const images: string[] = [
-        "./imgs/home1.jpg",
-        "./imgs/home3.jpg",
-        "./imgs/home2.jpg",
-        "./imgs/home1.jpg",
-        "./imgs/home3.jpg",
-        "./imgs/home2.jpg",
-        "./imgs/home1.jpg",
-        "./imgs/home3.jpg",
-        "./imgs/home2.jpg"
-    ];
+    const images = props.obras.map((obra: any) => obra.images[0])
 
     const handleNext = () => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -30,29 +20,33 @@ export default function Carousel() {
                 transform={`translateX(-${currentImageIndex * 34.33}%)`}
                 transition="transform 0.3s ease-in-out"
             >
-                {images.map((image, index) => (
-                    <Box key={index} flex="0 0 33.33%" w='150px' m={2}>
-                        <Image src={image} alt="carousel-image"  />
+                {props.obras.map((obra: any, index: any) => (
+                    <Box key={index} flex="0 0 33.33%" w='250px' m={2}>
+                        <Link href={`/obras/${obra.slug}`}>
+                            <Image src={obra.images[0]} alt="carousel-image" cursor="pointer" _hover={{ opacity: 0.8, transition: "opacity 0.3s ease"}} />
+                        </Link>
                     </Box>
                 ))}
             </Flex>
-            <IconButton
-                aria-label="previous"
-                icon={<ChevronLeftIcon />}
+            <ChevronLeftIcon
+                h="100px"
+                w="120px"
                 onClick={handlePrev}
                 position="absolute"
                 top="50%"
-                left="4"
+                left="-20px"
+                cursor="pointer"
                 transform="translateY(-50%)"
                 zIndex={1}
             />
-            <IconButton
-                aria-label="next"
-                icon={<ChevronRightIcon />}
+            <ChevronRightIcon
+                h="100px"
+                w="120px"
                 onClick={handleNext}
                 position="absolute"
                 top="50%"
-                right="2"
+                right="-25px"
+                cursor="pointer"
                 transform="translateY(-50%)"
                 zIndex={1}
             />

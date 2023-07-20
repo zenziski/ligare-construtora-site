@@ -35,14 +35,21 @@ export default function Header(props: { image: string }) {
             pl={0}
             m={0} w="100%"
             direction="row"
-            justifyContent="space-between"
+            justifyContent="space-around"
             height="100vh" p={10}
             bg={`url(${props.image})`} backgroundSize="cover" backgroundPosition="center" backgroundRepeat="no-repeat"
             transition="background 0.5s ease"
         >
-            <Flex>
-                <Image src="/imgs/logo.png" w="70px" h="70px" />
+            <Flex mt="-50px"
+                h="200px"
+                background="rgba(255, 255, 255, 0.2)"
+                borderRadius="5px"
+                boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
+                backdropFilter="blur(6px)">
+                <Image src="/imgs/logo_text.png" w="200px" h="200px" />
             </Flex>
+
+
             {
                 isMobile ? (
                     <>
@@ -84,7 +91,7 @@ export default function Header(props: { image: string }) {
                                 h="100vh"
                             >
                                 <HeaderMenu padding="0" location="Home" />
-                                <HeaderMenu padding="0" location="Projetos" />
+                                <HeaderMenu padding="0" location="Obras" />
                                 <HeaderMenu padding="0" location="Sobre nós" />
                                 <HeaderMenu padding="0" location="Contato" />
                             </Flex>
@@ -98,13 +105,13 @@ export default function Header(props: { image: string }) {
                         justifyContent="center"
                         gap={10} p={6}
                         h="40px"
-                        background="rgba(255, 255, 255, 0.2)" 
-                        borderRadius="5px 0px 0px 5px" 
-                        boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)" 
+                        background="rgba(255, 255, 255, 0.2)"
+                        borderRadius="5px 0px 0px 5px"
+                        boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
                         backdropFilter="blur(6px)"
                     >
                         <HeaderMenu padding="0" location="Home" />
-                        <HeaderMenu padding="0" location="Projetos" />
+                        <HeaderMenu padding="0" location="Obras" />
                         <HeaderMenu padding="0" location="Sobre nós" />
                         <HeaderMenu padding="80px" location="Contato" />
                     </Flex>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AddIcon, LinkIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 import { Button, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, Box, Checkbox, useToast } from "@chakra-ui/react";
 import { getImages } from "@/_services/galery.service";
 import { useValidation } from "@/_hooks/useValidate";
@@ -7,12 +7,13 @@ import { useValidation } from "@/_hooks/useValidate";
 export default function SelectImages(props: any) {
 
     const [images, setImages] = useState<any>([])
-    const [selectedImage, setSelectedImage] = useState<any>(null)
+    const [selectedImages, setSelectedImages] = useState<any>([])
     const { isOpen, onOpen, onClose } = useDisclosure()
     const sysValidation = useValidation()
     const toast = useToast()
 
     const handleImages = async () => {
+
         await sysValidation(async (token: string) => {
             const response = await getImages(token)
             setImages(response.files)
@@ -20,23 +21,26 @@ export default function SelectImages(props: any) {
     }
 
     const handleSelectImages = (location: string) => {
-        setSelectedImage(location)
+        if (selectedImages.includes(location)) {
+            setSelectedImages(selectedImages.filter((item: string) => item !== location))
+        } else {
+            setSelectedImages([...selectedImages, location])
+        }
     }
+
     const handleSave = async () => {
-        props.setImage(selectedImage)
+        props.setImages(selectedImages)
         onClose()
     }
 
     useEffect(() => {
-        if(isOpen){
-            handleImages()
-        }
-    }, [isOpen])
+        handleImages()
+    }, [])
 
     return (
         <>
             <Button cursor="pointer" onClick={onOpen} height='40px' width='60px' colorScheme="green" variant="outline">
-                <LinkIcon />
+                <AddIcon />
             </Button>
 
             <Modal size="2xl" isOpen={isOpen} onClose={onClose}>
@@ -51,7 +55,7 @@ export default function SelectImages(props: any) {
                                     return (
                                         <Card m={1} p={2}>
                                             <Flex justifyContent='flex-end'>
-                                                <Checkbox isChecked={selectedImage === image.location} onChange={() => handleSelectImages(image.location)} m={2} position='absolute' />
+                                                <Checkbox isChecked={selectedImages.includes(image.location)} onChange={() => handleSelectImages(image.location)} m={2} position='absolute' />
                                             </Flex>
                                             <Image width='180px' height='180px' src={image.location} />
                                         </Card>
