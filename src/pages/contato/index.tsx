@@ -45,13 +45,13 @@ export default function Home() {
             <Flex mt="45px" mb="85px" pl={10} pr={10} gap={4} direction="column">
                 <Text as="h1" fontFamily="Poppins-Bold" p={4} fontSize={isLargeScreen ? "64px" : "48px"} className="underline-text-heading-right">Contato</Text>
                 <Flex flexFlow='wrap' gap={4}>
-                    <Flex direction="column" gap={2} w="50%">
+                    <Flex direction="column" gap={2} w={isLargeScreen ? "50%" : '100%'}>
                         <FormLabel>
                             <Text fontFamily="Poppins-Medium">Nome Completo</Text>
                         </FormLabel>
                         <Input value={data.name} fontFamily="Poppins-Regular" placeholder="Nome completo" onChange={(e) => handleData(e, 'name')} />
                     </Flex>
-                    <Flex direction="column" gap={2}>
+                    <Flex direction="column" gap={2} w={isLargeScreen ? "" : '100%'} >
                         <FormLabel>
                             <Text fontFamily="Poppins-Medium">Telefone/Celular</Text>
                         </FormLabel>
@@ -59,7 +59,7 @@ export default function Home() {
                     </Flex>
                 </Flex>
                 <Flex flexFlow='wrap' gap={8} alignItems="center">
-                    <Flex direction="column" gap={2} w="50%">
+                    <Flex direction="column" gap={2} w={isLargeScreen ? "50%" : '100%'}>
                         <FormLabel>
                             <Text fontFamily="Poppins-Medium">Motivo do contato</Text>
                         </FormLabel>

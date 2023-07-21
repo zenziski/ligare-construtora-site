@@ -1,13 +1,20 @@
 import { getObrasById } from "@/_services/obras.service";
 import Ligare from "@/components/Ligare";
-import { Flex, Text, Image, useBreakpointValue, Grid, Link } from "@chakra-ui/react";
+import { Flex, Text, Image, useBreakpointValue, Grid, Link, useDisclosure } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import ModalCarousel from "@/components/carousel";
 
 export default function Projeto() {
     const [obra, setObra] = useState<any>(null)
     const router = useRouter();
     const { slug } = router.query;
+
+    const { isOpen, onClose, onOpen } = useDisclosure();
+
+    const handleOpenModal = () => {
+        onOpen()
+    }
 
     const getData = async () => {
         const result = await getObrasById(slug as string)
@@ -48,10 +55,21 @@ export default function Projeto() {
                 </Flex>
                 <Grid templateColumns={isLargeScreen ? "repeat(4, 1fr)" : "repeat(1, 1fr)"} gap={4} w="100%" h="100%">
                     {obra.images?.map((element: any, index: any) => (
-                        <Image src={element} w="100%" h="100%" key={index} />
+                        <Image _hover={{ cursor: 'pointer', opacity: 0.8 }} transition="opacity 0.3s" onClick={handleOpenModal} src={element} w="100%" h="100%" key={index} />
                     ))}
                 </Grid>
             </Flex>
+            {
+                isOpen ? (
+                    <ModalCarousel
+                        isOpen={isOpen}
+                        onClose={onClose}
+                        title={'Galeria'}
+                        images={obra.images}
+                    />
+                ) : null
+            }
+
         </Ligare>
     )
 }

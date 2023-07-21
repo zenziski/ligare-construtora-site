@@ -1,55 +1,35 @@
-import { Box, Flex, Image, IconButton, Link } from "@chakra-ui/react";
-import { useState } from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { Image, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody } from "@chakra-ui/react";
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.min.css';
 
-export default function Carousel(props: any) {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const images = props.obras.map((obra: any) => obra.images[0])
+SwiperCore.use([Navigation, Pagination]);
 
-    const handleNext = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    };
-
-    const handlePrev = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    };
-
+export default function ModalCarousel(props: any) {
     return (
-        <Box maxH="500px" mx="auto" position="relative" overflow="hidden">
-            <Flex
-                transform={`translateX(-${currentImageIndex * 34.33}%)`}
-                transition="transform 0.3s ease-in-out"
+        <Modal isOpen={props.isOpen} onClose={props.onClose}>
+            <ModalOverlay />
+            <ModalContent
+                maxW="900px" // Defina a largura máxima do modal como 900px
+                m="auto" // Centralize o modal horizontalmente definindo margens automáticas
             >
-                {props.obras.map((obra: any, index: any) => (
-                    <Box key={index} flex="0 0 33.33%" w='250px' m={2}>
-                        <Link href={`/obras/${obra.slug}`}>
-                            <Image src={obra.images[0]} alt="carousel-image" cursor="pointer" _hover={{ opacity: 0.8, transition: "opacity 0.3s ease"}} />
-                        </Link>
-                    </Box>
-                ))}
-            </Flex>
-            <ChevronLeftIcon
-                h="100px"
-                w="120px"
-                onClick={handlePrev}
-                position="absolute"
-                top="50%"
-                left="-20px"
-                cursor="pointer"
-                transform="translateY(-50%)"
-                zIndex={1}
-            />
-            <ChevronRightIcon
-                h="100px"
-                w="120px"
-                onClick={handleNext}
-                position="absolute"
-                top="50%"
-                right="-25px"
-                cursor="pointer"
-                transform="translateY(-50%)"
-                zIndex={1}
-            />
-        </Box>
+                <ModalCloseButton position="fixed" top="20px" size="lg" right="40px" />
+                <ModalBody p={0} display="flex" alignItems="center" justifyContent="center" h="100%">
+                    <Swiper navigation pagination style={{
+                        "--swiper-pagination-color": "#FFBA08",
+                        "--swiper-pagination-bullet-size": "10px",
+                        "--swiper-pagination-bullet-horizontal-gap": "6px"
+                    }}>
+                        {props.images.map((element: any) => {
+                            return (
+                                <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', maxHeight: '500px' }}>
+                                    <Image opacity={1} width="100%" height='100%' objectFit='cover' src={element} />
+                                </SwiperSlide>
+                            );
+                        })}
+                    </Swiper>
+                </ModalBody>
+            </ModalContent>
+        </Modal>
     );
 }
