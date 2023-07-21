@@ -13,7 +13,7 @@ export default function NovaObra(props: any) {
     const [slug, setSlug] = useState<string>('')
     const [type, setType] = useState<string>('construcao')
     const [images, setImages] = useState<any>([])
-    const [vinculo, setVinculo] = useState<any>("");
+    const [vinculo, setVinculo] = useState<any>("64b87095c2b4169134de5e8a");
     const toast = useToast();
     const sysValidation = useValidation();
     const [isLoading, setIsLoading] = useState(false);
