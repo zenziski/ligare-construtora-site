@@ -64,7 +64,7 @@ export default function Home() {
         console.log(reforma, construcao, projeto);
     }, [reforma, construcao, projeto])
     return (
-        reforma && construcao && projeto && <Wrapper title="Home">
+        <Wrapper title="Home">
             <Flex mt={4} width='100%' >
                 <Flex direction="column" w="100%">
                     <Flex direction="column" alignItems="center" gap={2}>
@@ -85,7 +85,7 @@ export default function Home() {
             <Flex mt={30} justifyContent="space-around" gap={4}>
                 <Flex direction="column" alignItems="center" justifyContent="center" w="100%" h="100%" gap={4} key={1}>
                     <Text fontFamily="Poppins-Medium" fontSize="18px">Reforma</Text>
-                    <Select value={reforma._id} onChange={(e) => setReforma(e.currentTarget.value)}>
+                    <Select value={reforma?._id} onChange={(e) => setReforma(e.currentTarget.value)}>
                         <option value="64b87095c2b4169134de5e8a">Selecione um vinculo (opcional)</option>
                         {obras.filter((obra) => obra.type === 'reforma').map((obra) => {
                             return (
@@ -97,7 +97,7 @@ export default function Home() {
                 </Flex>
                 <Flex direction="column" alignItems="center" justifyContent="center" w="100%" h="100%" gap={4} key={1}>
                     <Text fontFamily="Poppins-Medium" fontSize="18px">Construção</Text>
-                    <Select value={construcao._id} onChange={(e) => setConstrucao(e.currentTarget.value)}>
+                    <Select value={construcao?._id} onChange={(e) => setConstrucao(e.currentTarget.value)}>
                         <option value="64b87095c2b4169134de5e8a">Selecione um vinculo (opcional)</option>
                         {obras.filter((obra) => obra.type === 'construcao').map((obra) => {
                             return (
@@ -109,7 +109,7 @@ export default function Home() {
                 </Flex>
                 <Flex direction="column" alignItems="center" justifyContent="center" w="100%" h="100%" gap={4} key={1}>
                     <Text fontFamily="Poppins-Medium" fontSize="18px">Projeto</Text>
-                    <Select value={projeto._id} onChange={(e) => setProjeto(e.currentTarget.value)}>
+                    <Select value={projeto?._id} onChange={(e) => setProjeto(e.currentTarget.value)}>
                         <option value="64b87095c2b4169134de5e8a">Selecione um vinculo (opcional)</option>
                         {obras.filter((obra) => obra.type === 'projeto').map((obra) => {
                             return (
