@@ -58,13 +58,13 @@ export default function Login() {
   return (
     <Flex direction="row">
       <Flex bg="gray.500" height={{ base: '0vh', md: '100vh' }} width={{ base: '0', md: '70%' }} flexDirection='column' justifyContent='center' alignItems='center'>
-        <Image display={{ base: "none", md: "block" }} mb={3} src='../imgs/verso.jpeg' width='200px' height='200px' borderRadius='40px' objectFit='cover' />
+        <Image display={{ base: "none", md: "block" }} mb={3} src='/imgs/logo_text.png' width='200px' height='200px' borderRadius='40px' objectFit='cover' />
         <Text fontWeight='bold'>LIGARE CONSTRUTORA</Text>
       </Flex>
 
       <Flex justifyContent="center" alignItems="center" flexDirection='column' width={{ base: '100%', md: '30%' }} height={{ base: '100vh' }} >
 
-        <Image display={{ base: "block", md: "none" }} mb={3} src='../imgs/verso.jpeg' width='200px' height='200px' borderRadius='40px' objectFit='cover' />
+        <Image display={{ base: "block", md: "none" }} mb={3} src='/imgs/logo_text.png' width='200px' height='200px' borderRadius='40px' objectFit='cover' />
 
         <Card>
           <CardHeader>
