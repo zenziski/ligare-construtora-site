@@ -15,11 +15,7 @@ export default function ModalCarousel(props: any) {
             >
                 <ModalCloseButton position="fixed" top="20px" size="lg" right="40px" />
                 <ModalBody p={0} display="flex" alignItems="center" justifyContent="center" h="100%">
-                    <Swiper navigation pagination style={{
-                        "--swiper-pagination-color": "#FFBA08",
-                        "--swiper-pagination-bullet-size": "10px",
-                        "--swiper-pagination-bullet-horizontal-gap": "6px"
-                    }}>
+                    <Swiper navigation pagination>
                         {props.images.map((element: any) => {
                             return (
                                 <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', maxHeight: '500px' }}>
