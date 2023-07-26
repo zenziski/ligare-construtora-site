@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
-import { AddIcon, DeleteIcon, LinkIcon } from "@chakra-ui/icons";
-import { Button, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, Box, Checkbox, useToast, FormLabel, Text, Input, Select, Grid, GridItem } from "@chakra-ui/react";
-import { getImages } from "@/_services/galery.service";
+import { useState } from "react";
+import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
+import { Button, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, useToast, FormLabel, Text, Input, Select, Grid, GridItem } from "@chakra-ui/react";
 import { useValidation } from "@/_hooks/useValidate";
-import SelectImages from "../../home/modais/SelectImages";
 import { createSlug } from "@/utils/createSlug";
 import AddImages from "./AddImages";
 import { postObras } from "@/_services/obras.service";

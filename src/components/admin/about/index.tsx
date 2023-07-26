@@ -1,6 +1,6 @@
 
 import { Wrapper } from "@/components/wrapper"
-import { Flex, Text, Button, useToast, Image, FormLabel, Textarea, Select } from "@chakra-ui/react"
+import { Flex, Text, Button, useToast, Image, FormLabel, Textarea } from "@chakra-ui/react"
 import SelectImages from "../home/modais/SelectImages"
 import { useEffect, useState } from "react";
 import { useValidation } from '@/_hooks/useValidate';

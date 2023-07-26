@@ -37,7 +37,7 @@ export default function Header(props: { image: string }) {
             direction="row"
             justifyContent="space-around"
             height="100vh" p={10}
-            bg={`url(${props.image})`} backgroundSize="cover" backgroundPosition="center" backgroundRepeat="no-repeat"
+            bg={`url('${props.image}')`} backgroundSize="cover" backgroundPosition="center" backgroundRepeat="no-repeat"
             transition="background 0.5s ease"
         >
             <Flex mt="-50px"

@@ -44,9 +44,9 @@ export default function Projeto() {
                         })
                     ) : (null)}
                     {
-                        obra.type === 'projeto' && obra.vinculo.slug && (
+                        obra.type === 'projeto' && obra.vinculo && (
                             <Flex w="100%" mt="15px">
-                                <Link href={`/obras/${obra.vinculo.slug}`}>
+                                <Link href={`/obras/${obra?.vinculo?.slug}`}>
                                     <Text fontFamily="Poppins-Medium" fontSize="18px" className="underline-text">Ver obra pronta</Text>
                                 </Link>
                             </Flex>
@@ -55,7 +55,7 @@ export default function Projeto() {
                 </Flex>
                 <Grid templateColumns={isLargeScreen ? "repeat(4, 1fr)" : "repeat(1, 1fr)"} gap={4} w="100%" h="100%">
                     {obra.images?.map((element: any, index: any) => (
-                        <Image _hover={{ cursor: 'pointer', opacity: 0.8 }} transition="opacity 0.3s" onClick={handleOpenModal} src={element} w="100%" h="100%" key={index} />
+                        <Image _hover={{ cursor: 'pointer', opacity: 0.8 }} transition="opacity 0.3s" onClick={handleOpenModal} src={element} w="100%" h="240px" key={index} loading="lazy"/>
                     ))}
                 </Grid>
             </Flex>

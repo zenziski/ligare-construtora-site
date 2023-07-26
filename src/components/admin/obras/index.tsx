@@ -9,7 +9,7 @@ import DeleteObra from "./modais/DeleteObra";
 
 export default function Obras() {
     const [obras, setObras] = useState<any[]>([])
-    const [isLoading, setIsLoading] = useState(false);
+    const [, setIsLoading] = useState(false);
     const [refresh, setRefresh] = useState(false);
     const getData = async () => {
         setIsLoading(true)

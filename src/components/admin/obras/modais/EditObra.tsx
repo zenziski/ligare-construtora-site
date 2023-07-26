@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { AddIcon, ArrowRightIcon, DeleteIcon, LinkIcon } from "@chakra-ui/icons";
-import { Button, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, Box, Checkbox, useToast, FormLabel, Text, Input, Select, Grid, GridItem } from "@chakra-ui/react";
-import { getImages } from "@/_services/galery.service";
+import { DeleteIcon } from "@chakra-ui/icons";
+import { Button, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, useToast, FormLabel, Text, Input, Select, Grid, GridItem } from "@chakra-ui/react";
 import { useValidation } from "@/_hooks/useValidate";
-import SelectImages from "../../home/modais/SelectImages";
 import { createSlug } from "@/utils/createSlug";
 import AddImages from "./AddImages";
-import { editObras, postObras } from "@/_services/obras.service";
+import { editObras } from "@/_services/obras.service";
 
 export default function EditObra(props: any) {
     const [nome, setNome] = useState<string>('')

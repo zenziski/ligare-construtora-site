@@ -1,4 +1,4 @@
-import { Flex, Image, Text, Heading, Button, Box } from '@chakra-ui/react';
+import { Flex, Image, Text, Heading, Button } from '@chakra-ui/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.min.css';

@@ -26,6 +26,7 @@ export default function ProjectCard(props: ProjectCardProps) {
                     _hover={{ opacity: "0.7", transition: "opacity 0.3s" }}
                     cursor="pointer"
                     onClick={() => handlePage(props.slug || createSlug(props.title) as string)}
+                    loading="lazy"
                 />
             </Box>
             <Box ml={1}>

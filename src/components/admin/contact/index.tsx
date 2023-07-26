@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect, use } from "react"
-import { Flex, Text, Card, Input, Button, useToast, Image, Box, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Checkbox, Grid, GridItem, CardHeader, CardBody, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
+import { useState, useEffect } from "react"
+import { Flex, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 import { Wrapper } from "@/components/wrapper";
 import { useValidation } from "@/_hooks/useValidate";
 import { getContacts } from "@/_services/contact.service";

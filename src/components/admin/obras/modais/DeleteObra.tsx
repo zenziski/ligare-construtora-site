@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { AddIcon, ArrowRightIcon, DeleteIcon, LinkIcon } from "@chakra-ui/icons";
-import { Button, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, Box, Checkbox, useToast, FormLabel, Text, Input, Select, Grid, GridItem } from "@chakra-ui/react";
+import { useState } from "react";
+import { DeleteIcon } from "@chakra-ui/icons";
+import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, useToast, Text } from "@chakra-ui/react";
 import { useValidation } from "@/_hooks/useValidate";
-import { deleteObra, editObras, postObras } from "@/_services/obras.service";
+import { deleteObra } from "@/_services/obras.service";
 
 export default function EditObra(props: any) {
     const toast = useToast();

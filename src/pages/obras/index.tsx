@@ -1,16 +1,15 @@
 import Ligare from "@/components/Ligare";
-import { Flex, Text, useBreakpointValue, Image } from "@chakra-ui/react";
-import Carousel from "@/components/carousel";
+import { Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getObras } from "@/_services/obras.service";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Navigation } from "swiper";
+import { Navigation } from "swiper";
 import ProjectCard from "@/components/ProjectCard";
 
 
 export default function Projetos() {
     const [obras, setObras] = useState<any[]>([])
-    const [isLoading, setIsLoading] = useState(false);
+    const [, setIsLoading] = useState(false);
     const getData = async () => {
         setIsLoading(true)
         const data = await getObras()

@@ -1,10 +1,6 @@
-import { useState, useRef, useEffect, use } from "react"
-import { Flex, Text, Card, Input, Button, useToast, Image, Box, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Checkbox, Grid, GridItem, CardHeader, CardBody } from "@chakra-ui/react"
-import MiniLoading from "@/components/miniLoading"
+import { useState, useEffect } from "react"
+import { Flex, Card, Checkbox, Grid, GridItem, CardHeader, CardBody } from "@chakra-ui/react"
 import { Wrapper } from "@/components/wrapper";
-import Axios from 'axios';
-import { AddIcon } from '@chakra-ui/icons'
-import ModalCancel from "@/components/admin/galery/modais/DeleteImages";
 import Slider from "@/components/admin/galery/modais/Slider";
 import AddFile from "./modais/AddFile";
 import DeleteImages from "./modais/DeleteImages";
@@ -12,12 +8,11 @@ import { getImages } from "@/_services/galery.service";
 import { useValidation } from "@/_hooks/useValidate";
 
 export default function Galery() {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [, setIsLoading] = useState<boolean>(false);
     const [galeryImages, setGaleryImages] = useState([]);
     const [refresh, setRefresh] = useState<boolean>(false);
     const [selectedGaleryImages, setSelectedGaleryImages] = useState<any>([])
     const sysValidation = useValidation();
-    const toast = useToast();
 
     const fetchData = async () => {
         try {

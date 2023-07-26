@@ -1,8 +1,7 @@
-import { useState, useRef, useEffect } from "react"
-import { Flex, Text, Card, Input, Button, useToast, Box, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Image, Grid, GridItem, Checkbox } from "@chakra-ui/react"
+import { useState, useRef } from "react"
+import { Flex, Text, Card, Input, Button, useToast, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Image, Grid, GridItem } from "@chakra-ui/react"
 import MiniLoading from "@/components/miniLoading"
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
-import Axios from "axios";
 import { addImages } from "@/_services/galery.service";
 import { useValidation } from "@/_hooks/useValidate";
 
@@ -33,7 +32,7 @@ export default function AddFile(props: IAddFileProps) {
         setIsLoading(true)
         try {
             const formData = new FormData()
-            files.forEach((image: any, index: any) => {
+            files.forEach((image: any) => {
                 formData.append('files', image);
             })
             await sysValidation(async (token: string) => {
@@ -73,7 +72,9 @@ export default function AddFile(props: IAddFileProps) {
     };
 
     const handleClick = () => {
-        fileInputRef.current!.click();
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
     };
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {

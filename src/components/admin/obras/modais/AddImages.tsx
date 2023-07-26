@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AddIcon } from "@chakra-ui/icons";
-import { Button, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, Box, Checkbox, useToast } from "@chakra-ui/react";
+import { Button, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, Checkbox } from "@chakra-ui/react";
 import { getImages } from "@/_services/galery.service";
 import { useValidation } from "@/_hooks/useValidate";
 
@@ -10,7 +10,6 @@ export default function SelectImages(props: any) {
     const [selectedImages, setSelectedImages] = useState<any>([])
     const { isOpen, onOpen, onClose } = useDisclosure()
     const sysValidation = useValidation()
-    const toast = useToast()
 
     const handleImages = async () => {
 

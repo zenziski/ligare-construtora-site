@@ -5,7 +5,6 @@ import Galery from "@/components/admin/galery";
 import Dashboard from "./dashboard";
 import Home from "./admin/home";
 import About from "./admin/about";
-import { useCookies } from "react-cookie";
 import { useValidation } from "@/_hooks/useValidate";
 import Obras from "./admin/obras";
 import Contacts from "./admin/contact";
@@ -39,6 +38,7 @@ export default function Sidebar() {
     const sysValidation = useValidation();
 
     const validateLogin = async () => {
+        // eslint-disable-next-line  no-unused-vars
         await sysValidation(async (token: string) => {
             true;
         });

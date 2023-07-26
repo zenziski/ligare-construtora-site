@@ -24,7 +24,7 @@ export class ApiCall {
    * //**ResponseInterface** = Response Interface (The object that returns from the Backend, inside the "response" Object)
    * //**InputInterface** = Input Interface (Object that is being passed to the system)
    */
-  constructor(route: string, config: AxiosRequestConfig | undefined = undefined, admin = false) {
+  constructor(route: string, config: AxiosRequestConfig | undefined = undefined) {
     this.currentRoute = route;
     this.currentConfig = config;
     return this;
