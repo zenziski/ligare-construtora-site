@@ -2,6 +2,10 @@
 
 /* Style the prev/next navigation arrows */
 .swiper-button-prev,
-.swiper-button-next {
+.swiper-button-next{
   color: #ecc94b;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ecc94b;
 }

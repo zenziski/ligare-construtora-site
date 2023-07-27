@@ -31,7 +31,7 @@ export default function Projetos() {
                         {props.obras.filter((obra: any) => obra.type === props.type).map((obra: any) => {
                             return (
                                 <SwiperSlide key={obra._id} style={{ minWidth: '360px' }}  >
-                                    <ProjectCard title={obra.name} description={props.type === 'construcao' ? "Construção" : props.type === 'reforma' ? "Reforma" : "Projeto"} image={obra.images[0]} slug={obra.slug} />
+                                    <ProjectCard title={obra.name} description={props.type === 'construcao' ? "Construção" : props.type === 'reforma' ? "Reforma" : "Projeto"} image={obra.mainImage ? obra.mainImage : obra.images[0]} slug={obra.slug} />
                                 </SwiperSlide>
                             )
                         })}

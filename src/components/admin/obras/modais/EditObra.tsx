@@ -4,7 +4,7 @@ import { Button, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalF
 import { useValidation } from "@/_hooks/useValidate";
 import { createSlug } from "@/utils/createSlug";
 import AddImages from "./AddImages";
-import { editObras } from "@/_services/obras.service";
+import { editMainImage, editObras } from "@/_services/obras.service";
 
 export default function EditObra(props: any) {
     const [nome, setNome] = useState<string>('')
@@ -12,6 +12,7 @@ export default function EditObra(props: any) {
     const [type, setType] = useState<string>('construcao')
     const [images, setImages] = useState<any>([])
     const [vinculo, setVinculo] = useState<any>("");
+    const [mainImage, setMainImage] = useState<any>('')
     const toast = useToast();
     const sysValidation = useValidation();
     const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +40,29 @@ export default function EditObra(props: any) {
     const handleNome = (event: any) => {
         setNome(event.target.value)
         debounce(setSlug(createSlug(event.target.value) as string))
+    }
+
+    const handleChangeMainImage = async (image: any) => {
+        await sysValidation(async (token) => {
+            try {
+                await editMainImage({ mainImage: image, _id: props.data._id }, token)
+                onClose();
+                props.flushook(true)
+                toast({
+                    title: "Sucesso!",
+                    description: "Imagem principal definida com sucesso!",
+                    status: "success",
+                    duration: 5000,
+                });
+            } catch (error) {
+                toast({
+                    title: "Erro!",
+                    description: "Erro ao editar obra!",
+                    status: "error",
+                    duration: 5000,
+                });
+            }
+        })
     }
 
     const handleSubmit = async () => {
@@ -81,6 +105,7 @@ export default function EditObra(props: any) {
             setImages(props.data.images)
             setInputs(props.data.data)
             setVinculo(props.data.vinculo)
+            setMainImage(props.data.mainImage)
         }
     }, [isOpen])
 
@@ -188,11 +213,25 @@ export default function EditObra(props: any) {
                                 <AddImages setImages={setImages} />
                                 <Flex w="100%">
                                     <Grid templateColumns="repeat(2, 1fr)" gap={4} w="100%">
-                                        {images && images.map((image: any, index: number) => (
-                                            <GridItem>
-                                                <Image h="250px" w="250px" src={image} alt="Imagem" key={index} />
-                                            </GridItem>
-                                        ))}
+                                        {images && images.map((image: any, index: number) => {
+                                            return (
+                                                <GridItem border='1px solid lightgray' p={1} borderRadius='5px'>
+                                                    <Image h="250px" w="250px" src={image} alt="Imagem" key={index} />
+                                                    <Flex justify='space-around' >
+                                                        {
+                                                            mainImage === image ? (
+                                                                <Text h={6} w='60%' borderRadius='5px' mt={3} bg='lightgreen' textAlign='center'  >Imagem Principal</Text>
+                                                            ) : (
+                                                                <Button colorScheme='blue' mt={2} onClick={() => {
+                                                                    handleChangeMainImage(image)
+                                                                }}>Definir Principal</Button>
+                                                            )
+                                                        }
+
+                                                    </Flex>
+                                                </GridItem>
+                                            )
+                                        })}
                                     </Grid>
                                 </Flex>
                             </Flex>

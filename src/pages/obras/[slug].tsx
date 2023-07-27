@@ -16,7 +16,9 @@ export default function Projeto() {
         onOpen()
     }
 
-    const getData = async () => {
+    const getData = async () => {    
+        console.log(process.env.REACT_APP_BACKEND_API);
+        
         const result = await getObrasById(slug as string)
         setObra(result)
     }
@@ -28,7 +30,7 @@ export default function Projeto() {
     const isLargeScreen = useBreakpointValue({ base: false, lg: true });
 
     return (
-        obra && <Ligare image={obra.images[0]} title="Projeto">
+        obra && <Ligare image={obra.mainImage ? obra.mainImage : obra.images[0]} title="Projeto">
             <Flex mb="85px" direction="column" gap={6} p="40px">
                 <Text as="h1" fontFamily="Poppins-Bold" p={4} fontSize={isLargeScreen ? "64px" : "48px"} className="underline-text-heading-right">Ficha técnica</Text>
                 <Flex direction="column">
