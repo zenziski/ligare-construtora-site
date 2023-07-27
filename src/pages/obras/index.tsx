@@ -27,8 +27,8 @@ export default function Projetos() {
             <Flex direction="column">
                 <Text as="h1" fontFamily="Poppins-Bold" p={6} fontSize="32px" className="underline-text-heading-right" fontWeight="bold">{props.type === 'construcao' ? "Construção" : props.type === 'reforma' ? "Reforma" : "Projeto"}</Text>
                 <Flex h="100%" maxW={justifyCenter ? "360px" : "1280px"} >
-                    <Swiper direction="horizontal" slidesPerView={justifyCenter ? 1 : 3} navigation={true} spaceBetween={10} modules={[Navigation]}>
-                        {props.obras.filter((obra: any) => obra.type === props.type).map((obra: any) => {
+                    <Swiper direction="horizontal" slidesPerView={justifyCenter ? 1 : props.obras.filter((obra: any) => obra.type === props.type).length >= 3 ? 3 : props.obras.filter((obra: any) => obra.type === props.type).length} navigation={true} spaceBetween={6} modules={[Navigation]}>
+                        {props.obras.filter((obra: any) => obra.type === props.type).sort((a: any, b: any) => a.ordem - b.ordem).map((obra: any) => {
                             return (
                                 <SwiperSlide key={obra._id} style={{ minWidth: '360px' }}  >
                                     <ProjectCard title={obra.name} description={props.type === 'construcao' ? "Construção" : props.type === 'reforma' ? "Reforma" : "Projeto"} image={obra.mainImage ? obra.mainImage : obra.images[0]} slug={obra.slug} />

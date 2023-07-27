@@ -38,7 +38,7 @@ export default function Sidebar() {
     const sysValidation = useValidation();
 
     const validateLogin = async () => {
-        // eslint-disable-next-line  no-unused-vars
+        // eslint-disable-next-line no-unused-vars
         await sysValidation(async (token: string) => {
             true;
         });

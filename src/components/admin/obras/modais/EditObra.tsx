@@ -13,6 +13,7 @@ export default function EditObra(props: any) {
     const [images, setImages] = useState<any>([])
     const [vinculo, setVinculo] = useState<any>("");
     const [mainImage, setMainImage] = useState<any>('')
+    const [ordem, setOrdem] = useState<any>('')
     const toast = useToast();
     const sysValidation = useValidation();
     const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +74,8 @@ export default function EditObra(props: any) {
             type,
             images,
             data: inputs,
-            vinculo
+            vinculo,
+            ordem
         }
         await sysValidation(async (token) => {
             try {
@@ -106,6 +108,7 @@ export default function EditObra(props: any) {
             setInputs(props.data.data)
             setVinculo(props.data.vinculo)
             setMainImage(props.data.mainImage)
+            setOrdem(props.data.ordem)
         }
     }, [isOpen])
 
@@ -143,6 +146,12 @@ export default function EditObra(props: any) {
                                     <option value="reforma">Reforma</option>
                                     <option value="projeto">Projeto</option>
                                 </Select>
+                            </Flex>
+                            <Flex direction="column" gap={2}>
+                                <FormLabel>
+                                    <Text fontFamily="Poppins-Medium">Ordem</Text>
+                                </FormLabel>
+                                <Input placeholder="Ordem" type="number" value={ordem} onChange={(e) => setOrdem(e.target.value)} />
                             </Flex>
                         </Flex>
                         <Flex flexFlow='wrap' gap={4} mt={4}>
