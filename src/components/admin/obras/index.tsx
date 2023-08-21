@@ -34,7 +34,7 @@ export default function Obras() {
                             <Card key={obra.id} mt={4}>
                                 <CardBody>
                                     <Flex>
-                                        <Image src={obra.images[0]} width="250px" height="250px" />
+                                        <Image src={obra.mainImage ? obra.mainImage : obra.images[0]} width="250px" height="250px" />
                                         <Flex ml={4} direction="column" fontFamily="Poppins-Regular">
                                             <Text fontSize="2xl" fontWeight="bold">{obra.name}</Text>
                                             <Text>Slug: {obra.slug}</Text>
