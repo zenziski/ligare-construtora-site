@@ -3,19 +3,24 @@ import { AddIcon } from "@chakra-ui/icons";
 import { Button, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, Checkbox } from "@chakra-ui/react";
 import { getImages } from "@/_services/galery.service";
 import { useValidation } from "@/_hooks/useValidate";
+import PaginationComponent from "@/components/Pagination";
 
 export default function SelectImages(props: any) {
 
     const [images, setImages] = useState<any>([])
     const [selectedImages, setSelectedImages] = useState<any>([])
+    const [currentPage, setCurrentPage] = useState(0);
+    const [total, setTotal] = useState(0)
+    const perPage = 21;
     const { isOpen, onOpen, onClose } = useDisclosure()
     const sysValidation = useValidation()
 
     const handleImages = async () => {
 
         await sysValidation(async (token: string) => {
-            const response = await getImages(token)
+            const response = await getImages(currentPage, token)
             setImages(response.files)
+            setTotal(response.totalFiles)
         })
     }
 
@@ -26,6 +31,10 @@ export default function SelectImages(props: any) {
             setSelectedImages([...selectedImages, location])
         }
     }
+
+    const handlePageChange = (newPage: any) => {
+        setCurrentPage(newPage);
+    };
 
     const handleSave = async () => {
         props.setImages(selectedImages)
@@ -62,6 +71,11 @@ export default function SelectImages(props: any) {
                                 })
                             }
                         </Flex>
+                        <PaginationComponent
+                            currentPage={currentPage}
+                            totalPages={Math.ceil(total / perPage)}
+                            onPageChange={handlePageChange}
+                        />
                     </ModalBody>
                     <ModalFooter>
                         <Button colorScheme='blue' mr={3} onClick={handleSave} >
