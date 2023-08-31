@@ -53,10 +53,6 @@ export default function Galery() {
         fetchData()
     }, [])
 
-    useEffect(() => {
-        console.log(galeryImages)
-    }, [galeryImages])
-
     return (
         <Wrapper title="Galeria">
             <Flex padding={2} flexDirection='column' gap={4}>
