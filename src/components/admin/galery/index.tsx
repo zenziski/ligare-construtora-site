@@ -15,7 +15,7 @@ export default function Galery() {
     const [selectedGaleryImages, setSelectedGaleryImages] = useState<any>([])
     const [currentPage, setCurrentPage] = useState(0);
     const [total, setTotal] = useState(0)
-    const perPage = 10;
+    const perPage = 21;
     const sysValidation = useValidation();
 
     const fetchData = async () => {
