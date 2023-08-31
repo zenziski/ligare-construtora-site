@@ -10,12 +10,16 @@ import AddFile from "./modais/AddFile";
 import DeleteImages from "./modais/DeleteImages";
 import { getImages } from "@/_services/galery.service";
 import { useValidation } from "@/_hooks/useValidate";
+import PaginationComponent from "@/components/Pagination";
 
 export default function Galery() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [galeryImages, setGaleryImages] = useState([]);
     const [refresh, setRefresh] = useState<boolean>(false);
     const [selectedGaleryImages, setSelectedGaleryImages] = useState<any>([])
+    const [currentPage, setCurrentPage] = useState(0);
+    const [total, setTotal] = useState(0)
+    const perPage = 10;
     const sysValidation = useValidation();
     const toast = useToast();
 
@@ -23,8 +27,9 @@ export default function Galery() {
         try {
             await sysValidation(async (token: string) => {
                 setIsLoading(true);
-                const response = await getImages(token)
+                const response = await getImages(currentPage, token)
                 setGaleryImages(response.files)
+                setTotal(response.totalFiles)
                 setIsLoading(false);
             });
         } catch (error) {
@@ -39,12 +44,15 @@ export default function Galery() {
             setSelectedGaleryImages([...selectedGaleryImages, _id])
         }
     }
+    const handlePageChange = (newPage: any) => {
+        setCurrentPage(newPage);
+    };
 
     useEffect(() => {
         setRefresh(false);
         setSelectedGaleryImages([]);
         fetchData()
-    }, [refresh])
+    }, [refresh, currentPage])
 
     useEffect(() => {
         fetchData()
@@ -83,6 +91,11 @@ export default function Galery() {
                         }
                     </Grid>
                 </Flex>
+                <PaginationComponent
+                    currentPage={currentPage}
+                    totalPages={Math.ceil(total / perPage)}
+                    onPageChange={handlePageChange}
+                />
             </Flex>
         </Wrapper>
     )
