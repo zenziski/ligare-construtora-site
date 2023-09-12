@@ -75,7 +75,7 @@ export default function NovaObra(props: any) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
-            <Button cursor="pointer" onClick={onOpen} height='40px' width='60px' colorScheme="green" variant="outline">
+            <Button mr={2} cursor="pointer" onClick={onOpen} height='40px' width='60px' colorScheme="green" variant="outline">
                 <AddIcon />
             </Button>
 

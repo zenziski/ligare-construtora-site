@@ -1,11 +1,12 @@
 
 import { Wrapper } from "@/components/wrapper"
-import { Flex, Text, Card, CardBody, Image, Grid, GridItem, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Box } from "@chakra-ui/react"
+import { Flex, Text, Card, CardBody, Image, Grid, GridItem, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Box, Button } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
 import NovaObra from "./modais/NovaObra";
 import { getObras } from "@/_services/obras.service";
 import EditObra from "./modais/EditObra";
 import DeleteObra from "./modais/DeleteObra";
+import EditCover from "./modais/EditCover";
 
 export default function Obras() {
     const [obras, setObras] = useState<any[]>([])
@@ -57,7 +58,11 @@ export default function Obras() {
     return (
         <Wrapper title="Obras">
             <Flex mt={4} width='100%' direction="column">
-                <NovaObra flushook={setRefresh} todasObras={obras} />
+                <Flex>
+                    <NovaObra flushook={setRefresh} todasObras={obras} />
+                    <EditCover />
+
+                </Flex>
                 <Accordion allowMultiple mt={4}>
                     <AccordionItem>
                         <h2>
