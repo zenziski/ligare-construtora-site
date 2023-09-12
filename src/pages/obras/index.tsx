@@ -5,14 +5,18 @@ import { getObras } from "@/_services/obras.service";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import ProjectCard from "@/components/ProjectCard";
+import { getDataHome } from "@/_services/home.service";
 
 
 export default function Projetos() {
     const [obras, setObras] = useState<any[]>([])
+    const [coverImage, setCoverImage] = useState<string>('')
     const [, setIsLoading] = useState(false);
     const getData = async () => {
         setIsLoading(true)
         const data = await getObras()
+        const { capaObras } = await getDataHome()
+        setCoverImage(capaObras);
         setObras(data)
         setIsLoading(false)
     }
@@ -41,7 +45,7 @@ export default function Projetos() {
         )
     }
     return (
-        obras.length && <Ligare image="./imgs/home2.jpg" title="Projetos">
+        obras.length && <Ligare image={coverImage ? coverImage : "./imgs/home2.jpg"} title="Projetos">
             <Flex mt="85px" mb="85px" alignItems="center" direction="column" gap={6} flexWrap='wrap'>
                 <Flex direction="column" gap={8} flexWrap='wrap' alignItems={justifyCenter ? "center" : "initial"}>
                     {obras.filter((obra) => obra.type === 'construcao').length ? (

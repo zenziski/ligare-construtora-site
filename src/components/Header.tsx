@@ -36,17 +36,18 @@ export default function Header(props: { image: string }) {
             m={0} w="100%"
             direction="row"
             justifyContent="space-around"
-            height="100vh" p={10}
+            height="50vh" p={10}
             bg={`url('${props.image}')`} backgroundSize="cover" backgroundPosition="center" backgroundRepeat="no-repeat"
             transition="background 0.5s ease"
+            backdropFilter='blur(6px)'
         >
-            <Flex mt="-50px"
+            <Flex mt="50px"
                 h="200px"
-                background="rgba(255, 255, 255, 0.2)"
                 borderRadius="5px"
                 boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
-                backdropFilter="blur(6px)">
-                <Image src="/imgs/logo_text.png" w="200px" h="200px" />
+                backdropFilter='blur(6px)'
+                >
+                <Image src="/imgs/logo_text.png"  w="200px" h="200px" />
             </Flex>
 
 
