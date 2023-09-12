@@ -16,9 +16,7 @@ export default function Projeto() {
         onOpen()
     }
 
-    const getData = async () => {    
-        console.log(process.env.REACT_APP_BACKEND_API);
-        
+    const getData = async () => {            
         const result = await getObrasById(slug as string)
         setObra(result)
     }

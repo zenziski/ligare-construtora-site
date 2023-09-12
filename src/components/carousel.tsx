@@ -18,8 +18,8 @@ export default function ModalCarousel(props: any) {
                     <Swiper navigation pagination>
                         {props.images.map((element: any) => {
                             return (
-                                <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', maxHeight: '500px' }}>
-                                    <Image opacity={1} width="100%" height='100%' objectFit='cover' src={element} />
+                                <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '500px' }}>
+                                    <Image opacity={1} width="100%" height='100%' objectFit='fill' src={element} />
                                 </SwiperSlide>
                             );
                         })}

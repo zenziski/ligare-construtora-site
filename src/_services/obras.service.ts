@@ -26,3 +26,7 @@ export const deleteObra = async (id: any, token: any): Promise<any> => {
 export const getSlugObra = async (): Promise<any> => {
     return await new ApiCall(`/obras/slug`).get<any>()
 }
+
+export const editCover = async (body: any, token: any): Promise<any> => {
+    return await new ApiCall(`/obras/editCover`, ApiAuth(token)).post<any, any>(body)
+}

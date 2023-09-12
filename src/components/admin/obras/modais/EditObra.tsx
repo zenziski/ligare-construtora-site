@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { DeleteIcon } from "@chakra-ui/icons";
-import { Button, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, useToast, FormLabel, Text, Input, Select, Grid, GridItem } from "@chakra-ui/react";
+import { Button, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, useToast, FormLabel, Text, Input, Select, Grid, GridItem, Checkbox } from "@chakra-ui/react";
 import { useValidation } from "@/_hooks/useValidate";
 import { createSlug } from "@/utils/createSlug";
 import AddImages from "./AddImages";
 import { editMainImage, editObras } from "@/_services/obras.service";
+import { string } from "yup";
 
 export default function EditObra(props: any) {
     const [nome, setNome] = useState<string>('')
     const [slug, setSlug] = useState<string>('')
     const [type, setType] = useState<string>('construcao')
-    const [images, setImages] = useState<any>([])
+    const [images, setImages] = useState<any[]>([])
+    const [imagesToRemove, setImagesToRemove] = useState<string[]>([])
     const [vinculo, setVinculo] = useState<any>("");
     const [mainImage, setMainImage] = useState<any>('')
     const [ordem, setOrdem] = useState<any>('')
@@ -22,6 +24,27 @@ export default function EditObra(props: any) {
     const [inputs, setInputs] = useState<{ campo: string; valor: string }[]>([]);
     const [campo, setCampo] = useState("");
     const [valor, setValor] = useState("");
+
+    const handleSelectImages = (location: string) => {
+
+        if (imagesToRemove.includes(location)) {
+            setImagesToRemove(imagesToRemove.filter((item: string) => item !== location))
+        } else {
+            setImagesToRemove([...imagesToRemove, location])
+        }
+    }
+
+    const handleRemoveImages = async () => {
+
+        const arrAux = images.filter((image) => !imagesToRemove.includes(image))
+        setImages(arrAux)
+        toast({
+            title: "Sucesso!",
+            description: "Imagens removidas com sucesso, salve para confirmar",
+            status: "success",
+            duration: 5000,
+        });
+    }
 
     const handleAddInputs = () => {
         const newInputPair = { campo: campo, valor: valor };
@@ -109,6 +132,7 @@ export default function EditObra(props: any) {
             setVinculo(props.data.vinculo)
             setMainImage(props.data.mainImage)
             setOrdem(props.data.ordem)
+            setImagesToRemove([])
         }
     }, [isOpen])
 
@@ -219,12 +243,18 @@ export default function EditObra(props: any) {
                                 <FormLabel>
                                     <Text fontFamily="Poppins-Medium">Imagens</Text>
                                 </FormLabel>
-                                <AddImages setImages={setImages} />
+                                <Flex>
+                                    <AddImages setImages={setImages} />
+                                    <Button ml={2} isDisabled={imagesToRemove.length === 0} onClick={handleRemoveImages} variant='outline' cursor='pointer' height='40px' width='60px' colorScheme='red'>
+                                        <DeleteIcon />
+                                    </Button>
+                                </Flex>
                                 <Flex w="100%">
                                     <Grid templateColumns="repeat(2, 1fr)" gap={4} w="100%">
                                         {images && images.map((image: any, index: number) => {
                                             return (
                                                 <GridItem border='1px solid lightgray' p={1} borderRadius='5px'>
+                                                    <Checkbox value={image} onChange={() => handleSelectImages(image)} position='absolute' mt='10px' ml='10px' />
                                                     <Image h="250px" w="250px" src={image} alt="Imagem" key={index} />
                                                     <Flex justify='space-around' >
                                                         {
