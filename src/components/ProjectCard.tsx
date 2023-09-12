@@ -19,7 +19,6 @@ export default function ProjectCard(props: ProjectCardProps) {
                 <Image
                     src={props.image}
                     alt={props.title}
-                    objectFit="cover"
                     w="100%"
                     h="100%"
                     p={1}
