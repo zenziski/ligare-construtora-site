@@ -7,9 +7,10 @@ import DeleteImages from "./modais/DeleteImages";
 import { getImages } from "@/_services/galery.service";
 import { useValidation } from "@/_hooks/useValidate";
 import PaginationComponent from "@/components/Pagination";
+import MiniLoading from "@/components/miniLoading";
 
 export default function Galery() {
-    const [, setIsLoading] = useState<boolean>(false);
+    const [loading, setIsLoading] = useState<boolean>(false);
     const [galeryImages, setGaleryImages] = useState([]);
     const [refresh, setRefresh] = useState<boolean>(false);
     const [selectedGaleryImages, setSelectedGaleryImages] = useState<any>([])
@@ -55,39 +56,42 @@ export default function Galery() {
 
     return (
         <Wrapper title="Galeria">
-            <Flex padding={2} flexDirection='column' gap={4}>
-                <Flex direction="row" justifyContent="flex-end" w="100%" gap={2}>
-                    <AddFile flushHook={setRefresh} />
-                    <DeleteImages flushHook={setRefresh} imagesToDelete={selectedGaleryImages} />
+            {loading ? (<MiniLoading size={80} color="#ecc94b"/>) : (
+                <Flex padding={2} flexDirection='column' gap={4}>
+                    <Flex direction="row" justifyContent="flex-end" w="100%" gap={2}>
+                        <AddFile flushHook={setRefresh} />
+                        <DeleteImages flushHook={setRefresh} imagesToDelete={selectedGaleryImages} />
+                    </Flex>
+                    <Flex flexWrap='wrap'>
+                        <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', xl: 'repeat(7, 1fr)' }} gap={6}>
+                            {
+                                galeryImages.length && galeryImages.map((image: any, index: number) => {
+                                    return (
+                                        <GridItem key={index}>
+                                            <Card display='flex' alignItems='center' justify='center' height='225px' width='225px' >
+                                                <CardHeader w="100%" display="flex" justifyContent="flex-end">
+                                                    <Checkbox isChecked={selectedGaleryImages.includes(image._id)} onChange={() => handleSelectImages(image._id)} />
+                                                </CardHeader>
+                                                <CardBody>
+                                                    <Flex >
+                                                        <Slider location={image.location} name={image.name} images={galeryImages} initial={index} />
+                                                    </Flex>
+                                                </CardBody>
+                                            </Card>
+                                        </GridItem>
+                                    )
+                                })
+                            }
+                        </Grid>
+                    </Flex>
+                    <PaginationComponent
+                        currentPage={currentPage}
+                        totalPages={Math.ceil(total / perPage)}
+                        onPageChange={handlePageChange}
+                    />
                 </Flex>
-                <Flex flexWrap='wrap'>
-                    <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', xl: 'repeat(7, 1fr)' }} gap={6}>
-                        {
-                            galeryImages.length && galeryImages.map((image: any, index: number) => {
-                                return (
-                                    <GridItem key={index}>
-                                        <Card display='flex' alignItems='center' justify='center' height='225px' width='225px' >
-                                            <CardHeader w="100%" display="flex" justifyContent="flex-end">
-                                                <Checkbox isChecked={selectedGaleryImages.includes(image._id)} onChange={() => handleSelectImages(image._id)} />
-                                            </CardHeader>
-                                            <CardBody>
-                                                <Flex >
-                                                    <Slider location={image.location} name={image.name} images={galeryImages} initial={index} />
-                                                </Flex>
-                                            </CardBody>
-                                        </Card>
-                                    </GridItem>
-                                )
-                            })
-                        }
-                    </Grid>
-                </Flex>
-                <PaginationComponent
-                    currentPage={currentPage}
-                    totalPages={Math.ceil(total / perPage)}
-                    onPageChange={handlePageChange}
-                />
-            </Flex>
+            )}
+
         </Wrapper>
     )
 }
