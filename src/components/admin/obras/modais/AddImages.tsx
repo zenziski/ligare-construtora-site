@@ -4,9 +4,11 @@ import { Button, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, 
 import { getImages } from "@/_services/galery.service";
 import { useValidation } from "@/_hooks/useValidate";
 import PaginationComponent from "@/components/Pagination";
+import MiniLoading from "@/components/miniLoading";
 
 export default function SelectImages(props: any) {
 
+    const [loading, setLoading] = useState<boolean>(false);
     const [images, setImages] = useState<any>([])
     const [selectedImages, setSelectedImages] = useState<any>([])
     const [currentPage, setCurrentPage] = useState(0);
@@ -16,12 +18,13 @@ export default function SelectImages(props: any) {
     const sysValidation = useValidation()
 
     const handleImages = async () => {
-
+        setLoading(true)
         await sysValidation(async (token: string) => {
             const response = await getImages(currentPage, token)
             setImages(response.files)
             setTotal(response.totalFiles)
         })
+        setLoading(false)
     }
 
     const handleSelectImages = (location: string) => {
@@ -43,7 +46,7 @@ export default function SelectImages(props: any) {
 
     useEffect(() => {
         handleImages()
-    }, [])
+    }, [currentPage])
 
     return (
         <>
@@ -57,25 +60,29 @@ export default function SelectImages(props: any) {
                     <ModalHeader>Imagens da Galeria</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Flex flexFlow='wrap' justifyContent='center'>
-                            {
-                                images.map((image: any) => {
-                                    return (
-                                        <Card m={1} p={2}>
-                                            <Flex justifyContent='flex-end'>
-                                                <Checkbox isChecked={selectedImages.includes(image.location)} onChange={() => handleSelectImages(image.location)} m={2} position='absolute' />
-                                            </Flex>
-                                            <Image width='180px' height='180px' src={image.location} />
-                                        </Card>
-                                    )
-                                })
-                            }
-                        </Flex>
-                        <PaginationComponent
-                            currentPage={currentPage}
-                            totalPages={Math.ceil(total / perPage)}
-                            onPageChange={handlePageChange}
-                        />
+                        {loading ? (<MiniLoading size={80} color="#ecc94b"/>) : (
+                            <>
+                                <Flex flexFlow='wrap' justifyContent='center'>
+                                    {
+                                        images.map((image: any, index: number) => {
+                                            return (
+                                                <Card m={1} p={2} key={index}>
+                                                    <Flex justifyContent='flex-end'>
+                                                        <Checkbox isChecked={selectedImages.includes(image.location)} onChange={() => handleSelectImages(image.location)} m={2} position='absolute' />
+                                                    </Flex>
+                                                    <Image width='180px' height='180px' src={image.location} alt={image.location} />
+                                                </Card>
+                                            )
+                                        })
+                                    }
+                                </Flex>
+                                <PaginationComponent
+                                    currentPage={currentPage}
+                                    totalPages={Math.ceil(total / perPage)}
+                                    onPageChange={handlePageChange}
+                                />
+                            </>
+                        )}
                     </ModalBody>
                     <ModalFooter>
                         <Button colorScheme='blue' mr={3} onClick={handleSave} >

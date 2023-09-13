@@ -4,7 +4,6 @@ import React from 'react';
 
 const PaginationComponent = ({ currentPage, totalPages, onPageChange }: { currentPage: any, totalPages: any, onPageChange: any }) => {
     const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
-
     return (
         <div className="pagination">
             <Button

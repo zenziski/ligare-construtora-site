@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Button, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, useToast, FormLabel, Text, Input, Select, Grid, GridItem } from "@chakra-ui/react";
 import { useValidation } from "@/_hooks/useValidate";
 import { createSlug } from "@/utils/createSlug";
 import AddImages from "./AddImages";
-import { postObras } from "@/_services/obras.service";
+import { postObras, getSlugObra } from "@/_services/obras.service";
 
 export default function NovaObra(props: any) {
     const [nome, setNome] = useState<string>('')
     const [slug, setSlug] = useState<string>('')
     const [type, setType] = useState<string>('construcao')
-    const [images, setImages] = useState<any>([])
+    const [images, setImages] = useState<any[]>([])
+    const [slugs, setSlugs] = useState<any>([]);
+    const [slugError, setSlugsError] = useState<boolean>(false);
     const [vinculo, setVinculo] = useState<any>("64b87095c2b4169134de5e8a");
     const toast = useToast();
     const sysValidation = useValidation();
@@ -27,6 +29,23 @@ export default function NovaObra(props: any) {
         setValor("");
     };
 
+    const getSlugs = async () => {
+        const result = await getSlugObra();
+        setSlugs(result);
+    }
+
+    useEffect(() => {
+        getSlugs();
+    }, [])
+
+    useEffect(() => {
+        if(slug?.length && slugs.find((s: {slug: string}) => s.slug == slug)){
+            setSlugsError(true)
+        } else {
+            setSlugsError(false)
+        }
+    }, [slug, slugs])
+
     function debounce(func: any, timeout = 300) {
         let timer: any;
         return function (this: any, ...args: any) {
@@ -37,7 +56,7 @@ export default function NovaObra(props: any) {
 
     const handleNome = (event: any) => {
         setNome(event.target.value)
-        debounce(setSlug(createSlug(event.target.value) as string))
+        debounce(setSlug(createSlug(event.target.value || "") as string))
     }
 
     const handleSubmit = async () => {
@@ -98,6 +117,9 @@ export default function NovaObra(props: any) {
                                     <Text fontFamily="Poppins-Medium">Slug</Text>
                                 </FormLabel>
                                 <Input placeholder="Slug" value={slug} onChange={(e) => setSlug(e.target.value)} />
+                                {slugError ? (
+                                    <Text color={"red"}>Slug já existente</Text>
+                                ) : null}
                             </Flex>
                         </Flex>
                         <Flex flexFlow='wrap' gap={4} mt={4}>
@@ -191,7 +213,7 @@ export default function NovaObra(props: any) {
                         </Flex>
                     </ModalBody>
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3} isDisabled={isLoading} onClick={() => handleSubmit()}>
+                        <Button colorScheme='blue' mr={3} isDisabled={isLoading || slugError || !nome.length} onClick={() => handleSubmit()}>
                             Salvar
                         </Button>
                         <Button variant='ghost' onClick={onClose}>Fechar</Button>

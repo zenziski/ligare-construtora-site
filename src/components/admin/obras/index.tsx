@@ -1,6 +1,6 @@
 
 import { Wrapper } from "@/components/wrapper"
-import { Flex, Text, Card, CardBody, Image, Grid, GridItem, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Box, Button } from "@chakra-ui/react"
+import { Flex, Text, Card, CardBody, Image, Grid, GridItem, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Box } from "@chakra-ui/react"
 import { useEffect, useState } from "react";
 import NovaObra from "./modais/NovaObra";
 import { getObras } from "@/_services/obras.service";
@@ -29,7 +29,7 @@ export default function Obras() {
     const ShowCards = (props: any) => {
         return (
             <Flex gap={4}>
-                <Grid templateColumns="repeat(3, 1fr)" gap={4} w="100%">
+                <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }} gap={4} w="100%">
                     {obras.length && obras.filter(item => item.type === props.type).sort((a: any, b: any) => a.ordem - b.ordem).map((obra: any) => (
                         <GridItem>
                             <Card key={obra.id} mt={4}>

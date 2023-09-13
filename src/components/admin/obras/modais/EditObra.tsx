@@ -5,7 +5,6 @@ import { useValidation } from "@/_hooks/useValidate";
 import { createSlug } from "@/utils/createSlug";
 import AddImages from "./AddImages";
 import { editMainImage, editObras } from "@/_services/obras.service";
-import { string } from "yup";
 
 export default function EditObra(props: any) {
     const [nome, setNome] = useState<string>('')
@@ -44,6 +43,7 @@ export default function EditObra(props: any) {
             status: "success",
             duration: 5000,
         });
+        handleSubmit()
     }
 
     const handleAddInputs = () => {

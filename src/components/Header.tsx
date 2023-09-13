@@ -7,7 +7,7 @@ const HeaderMenu = ({ location, padding }: { location: string, padding: string }
     return (
         <Flex h="30px" zIndex={4} pr={padding}>
             <Link href={`/${createSlug(location)}`}>
-                <Text fontFamily="Poppins-Medium" className="underline-animation" cursor="pointer" color="white">{location}</Text>
+                <Text fontSize="18px" fontFamily="Poppins-Medium" className="underline-animation" cursor="pointer" color="white">{location}</Text>
             </Link>
         </Flex >
     )
@@ -29,39 +29,41 @@ export default function Header(props: { image: string }) {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
-
+    const imageSize = !isMobile ? "350px" : "200px"
     return (
         <Flex
             pl={0}
             m={0} w="100%"
             direction="row"
             justifyContent="space-around"
-            height="50vh" p={10}
-            bg={`url('${props.image}')`} backgroundSize="cover" backgroundPosition="center" backgroundRepeat="no-repeat"
+            height="60vh" p={10}
+            bg={`url('${props.image}')`} backgroundSize={isMobile ? "cover" : "100%"} backgroundPosition="center" backgroundRepeat="no-repeat"
             transition="background 0.5s ease"
-            backdropFilter='blur(6px)'
         >
             <Flex mt="50px"
-                h="200px"
+                h={imageSize}
                 borderRadius="5px"
                 boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
-                backdropFilter='blur(6px)'
-                >
-                <Image src="/imgs/logo_text.png"  w="200px" h="200px" />
+                backdropFilter='blur(8px)'
+            >
+                <Image src="/imgs/logo_text.png" w={imageSize} h={imageSize} />
             </Flex>
-
-
+            {/* menu */}
             {
                 isMobile ? (
                     <>
                         <IconButton
                             aria-label="Abrir Menu"
-                            icon={<HamburgerIcon />}
+                            icon={<HamburgerIcon width="40px"
+                                height="40px" />}
                             onClick={onOpen}
                             color='white'
                             variant='ghost'
                             size='lg'
                             display={isOpen ? 'none' : ''}
+                            position="absolute"
+                            left="85%"
+
                         />
                         <Box
                             pos='fixed'
@@ -71,7 +73,7 @@ export default function Header(props: { image: string }) {
                             bg="rgba(0, 0, 0, 0.8)"
                             w={isOpen ? "100%" : 0}
                             transition="width 0.3s"
-                            zIndex={3}
+                            zIndex={999}
                             overflow="hidden"
                             display={{ base: "block", md: "none" }}
                         >
@@ -89,6 +91,7 @@ export default function Header(props: { image: string }) {
                                 justifyContent="center"
                                 gap={10}
                                 p={6}
+                                mt="-250px"
                                 h="100vh"
                             >
                                 <HeaderMenu padding="0" location="Home" />

@@ -36,7 +36,6 @@ export default function Home() {
             projeto: projeto,
             imagemPrincipal: imagemPrincipal
         }
-        console.log(data)
         await sysValidation(async (token: string) => {
             postHomeData(data, token).then(() => {
                 toast({
@@ -60,9 +59,6 @@ export default function Home() {
         getData();
     }, [])
 
-    useEffect(() => {
-        console.log(reforma, construcao, projeto);
-    }, [reforma, construcao, projeto])
     return (
         <Wrapper title="Home">
             <Flex mt={4} width='100%' >
