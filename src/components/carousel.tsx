@@ -10,7 +10,7 @@ export default function ModalCarousel(props: any) {
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
             <ModalOverlay />
             <ModalContent
-                maxW="900px" // Defina a largura máxima do modal como 900px
+                maxW="1280px" // Defina a largura máxima do modal como 900px
                 m="auto" // Centralize o modal horizontalmente definindo margens automáticas
             >
                 <ModalCloseButton position="fixed" top="20px" size="lg" right="40px" />
@@ -18,7 +18,7 @@ export default function ModalCarousel(props: any) {
                     <Swiper navigation pagination>
                         {props.images.map((element: any) => {
                             return (
-                                <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '500px' }}>
+                                <SwiperSlide style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '720px' }}>
                                     <Image opacity={1} width="100%" height='100%' objectFit='fill' src={element} />
                                 </SwiperSlide>
                             );

@@ -63,7 +63,7 @@ export default function Galery() {
                         <DeleteImages flushHook={setRefresh} imagesToDelete={selectedGaleryImages} />
                     </Flex>
                     <Flex flexWrap='wrap'>
-                        <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', xl: 'repeat(7, 1fr)' }} gap={6}>
+                        <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(5, 1fr)', xl: 'repeat(7, 1fr)' }} gap={6}>
                             {
                                 galeryImages.length && galeryImages.map((image: any, index: number) => {
                                     return (

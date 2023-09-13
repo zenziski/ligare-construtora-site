@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import "../styles/index.css";
 import 'swiper/swiper-bundle.min.css';
 import '../pages/obras/swiper.css';
+import { AnimatePresence } from 'framer-motion';
 
 const underlineAnimation = keyframes`
   0% {
@@ -102,7 +103,13 @@ const theme = extendTheme({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <AnimatePresence
+        mode='wait'
+        initial={false}
+        onExitComplete={() => window.scrollTo(0, 0)}
+      >
+        <Component {...pageProps} />
+      </AnimatePresence>
     </ChakraProvider>
 
   )

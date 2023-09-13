@@ -1,12 +1,9 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { Button } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const PaginationComponent = ({ currentPage, totalPages, onPageChange }: { currentPage: any, totalPages: any, onPageChange: any }) => {
     const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
-    useEffect(() => {
-        console.log(currentPage)
-    }, [currentPage])
     return (
         <div className="pagination">
             <Button

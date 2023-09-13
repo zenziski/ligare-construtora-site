@@ -109,7 +109,3 @@ export default function EditCover() {
         </>
     )
 }
-
-function toast(arg0: { title: string; description: string; status: string; duration: number; }) {
-    throw new Error("Function not implemented.");
-}
