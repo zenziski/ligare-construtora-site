@@ -7,10 +7,10 @@ import { AnimatePresence } from 'framer-motion';
 
 const underlineAnimation = keyframes`
   0% {
-    width: 20%;
+    width: 0%;
   }
   100% {
-    width: 100%;
+    width: 30%;
   }
 `;
 const theme = extendTheme({
@@ -69,7 +69,7 @@ const theme = extendTheme({
         position: "absolute",
         bottom: "25px",
         right: 0,
-        width: "100%",
+        width: "30%",
         height: "7px",
         backgroundColor: "primary",
         transition: "width 0.3s, opacity 0.3s",
@@ -85,7 +85,7 @@ const theme = extendTheme({
         position: "absolute",
         bottom: "25px",
         left: 0,
-        width: "100%",
+        width: "30%",
         height: "7px",
         backgroundColor: "primary",
         transition: "width 0.3s, opacity 0.3s",

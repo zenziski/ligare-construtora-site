@@ -127,6 +127,36 @@ code {
   src: url("../../public/fonts/Poppins-ThinItalic.ttf");
 }
 
+@font-face {
+  font-family: Oswald-Bold;
+  src: url("../../public/fonts/Oswald-Bold.ttf");
+}
+
+@font-face {
+  font-family: Oswald-ExtraLight;
+  src: url("../../public/fonts/Oswald-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: Oswald-Light;
+  src: url("../../public/fonts/Oswald-Light.ttf");
+}
+
+@font-face {
+  font-family: Oswald-Medium;
+  src: url("../../public/fonts/Oswald-Medium.ttf");
+}
+
+@font-face {
+  font-family: Oswald-Regular;
+  src: url("../../public/fonts/Oswald-Regular.ttf");
+}
+
+@font-face {
+  font-family: Oswald-SemiBold;
+  src: url("../../public/fonts/Oswald-SemiBold.ttf");
+}
+
 
 html {
   width: 100%;

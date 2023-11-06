@@ -41,9 +41,8 @@ export default function Home() {
     }
 
     return (
-        <Ligare image="/imgs/home1.jpg" title="Contato">
+        <Ligare image="/imgs/home1.jpg" title="Contato" text="ENTRE EM CONTATO" page="contato">
             <Flex mt="45px" mb="85px" pl={10} pr={10} gap={4} direction="column">
-                <Text as="h1" fontFamily="Poppins-Bold" p={4} fontSize={isLargeScreen ? "64px" : "48px"} className="underline-text-heading-right">Contato</Text>
                 <Flex flexFlow='wrap' gap={4}>
                     <Flex direction="column" gap={2} w={isLargeScreen ? "50%" : '100%'}>
                         <FormLabel>
