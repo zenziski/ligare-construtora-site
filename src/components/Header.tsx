@@ -1,19 +1,23 @@
 import { createSlug } from "@/utils/createSlug";
-import { Box, Flex, Image, Link, Text, IconButton, useDisclosure } from "@chakra-ui/react";
+import { Box, Flex, Link, Text, IconButton, useDisclosure } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useState, useEffect } from "react";
 
-const HeaderMenu = ({ location, padding }: { location: string, padding: string }) => {
+const HeaderMenu = ({ location }: { location: string }) => {
     return (
-        <Flex h="30px" zIndex={4} pr={padding}>
-            <Link href={`/${createSlug(location)}`}>
-                <Text fontSize="18px" fontFamily="Poppins-Medium" className="underline-animation" cursor="pointer" color="white">{location}</Text>
+        <Flex h="40px" zIndex={4}>
+            <Link href={`/${location == "Sobre nós" ? "#sobre-nos" : createSlug(location)}`}>
+                <Text fontSize="24px" fontFamily="Oswald-Regular" className="underline-animation" cursor="pointer" color="black">{location}</Text>
             </Link>
         </Flex >
     )
 }
-
-export default function Header(props: { image: string }) {
+type Props = {
+    image: string,
+    text: string,
+    page: string
+}
+export default function Header(props: Props) {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -29,25 +33,48 @@ export default function Header(props: { image: string }) {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
-    const imageSize = !isMobile ? "350px" : "200px"
+    const calculateFontSize = (text: string) => {
+        let minLengthForMaxFontSize = 10;
+        const textLength = text.length;
+        // You can adjust these values to fit your specific requirements
+        const minFontSize = 150; // Minimum font size
+        const maxFontSize = 150; // Maximum font size
+
+        // Calculate font size based on text length
+        const fontSize =
+            textLength <= minLengthForMaxFontSize
+                ? minFontSize
+                : minFontSize + (maxFontSize - minFontSize) * (textLength / minLengthForMaxFontSize);
+
+        return fontSize;
+    };
+    const logoProps = {
+        color: ["obras", "obra"].includes(props.page) ? "gray.200" : "white",
+        fontFamily: "Oswald-Bold",
+        fontSize: isMobile ?
+            "120px" :
+            props.page === "home" ? "500px" : calculateFontSize(props.text),
+        lineHeight: isMobile ? "300%" : (["obras", "obra"].includes(props.page) ? "48%" : "1"),
+        opacity: ["obras", "obra"].includes(props.page) ? "0.8" : "1",
+    }
+
+
     return (
         <Flex
             pl={0}
             m={0} w="100%"
-            direction="row"
-            justifyContent="space-around"
-            height="60vh" p={10}
-            bg={`url('${props.image}')`} backgroundSize={isMobile ? "cover" : "100%"} backgroundPosition="center" backgroundRepeat="no-repeat"
-            transition="background 0.5s ease"
+            direction="column"
+            justifyContent="flex-end"
+            alignItems="center"
+            height="80vh" p={10}
+            bg={`url('${props.image}')`} backgroundSize={"cover"} backgroundPosition="center" backgroundRepeat="no-repeat"
         >
-            <Flex mt="50px"
-                h={imageSize}
-                borderRadius="5px"
-                boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
-                backdropFilter='blur(8px)'
+            {/* logo */}
+            <Text
+                {...logoProps}
             >
-                <Image src="/imgs/logo_text.png" w={imageSize} h={imageSize} />
-            </Flex>
+                {props.text}
+            </Text>
             {/* menu */}
             {
                 isMobile ? (
@@ -94,30 +121,31 @@ export default function Header(props: { image: string }) {
                                 mt="-250px"
                                 h="100vh"
                             >
-                                <HeaderMenu padding="0" location="Home" />
-                                <HeaderMenu padding="0" location="Obras" />
-                                <HeaderMenu padding="0" location="Sobre nós" />
-                                <HeaderMenu padding="0" location="Contato" />
+                                <HeaderMenu location="Home" />
+                                <HeaderMenu location="Obras" />
+                                <HeaderMenu location="Sobre nós" />
+                                <HeaderMenu location="Contato" />
                             </Flex>
                         </Box>
                     </>
                 ) : (
                     <Flex
                         pos='absolute'
-                        right='0'
+                        top={20}
+                        right={20}
                         alignItems="center"
                         justifyContent="center"
                         gap={10} p={6}
                         h="40px"
                         background="rgba(255, 255, 255, 0.2)"
-                        borderRadius="5px 0px 0px 5px"
+                        borderRadius="20px"
                         boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
                         backdropFilter="blur(6px)"
                     >
-                        <HeaderMenu padding="0" location="Home" />
-                        <HeaderMenu padding="0" location="Obras" />
-                        <HeaderMenu padding="0" location="Sobre nós" />
-                        <HeaderMenu padding="80px" location="Contato" />
+                        <HeaderMenu location="Home" />
+                        <HeaderMenu location="Obras" />
+                        <HeaderMenu location="Sobre nós" />
+                        <HeaderMenu location="Contato" />
                     </Flex>
                 )
             }

@@ -29,8 +29,8 @@ export default function ProjectCard(props: ProjectCardProps) {
                 />
             </Box>
             <Box ml={1}>
-                <Text fontSize="18px" fontFamily="Poppins-Medium">{props.title}</Text>
-                <Text fontSize="14px" fontFamily="Poppins-Light">{props.description}</Text>
+                <Text fontSize="32px" fontFamily="Oswald-Bold">{props.title}</Text>
+                <Text fontSize="24px" fontFamily="Oswald-Light">{props.description}</Text>
             </Box>
 
         </Flex>

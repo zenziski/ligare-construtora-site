@@ -23,13 +23,18 @@ export default function Projetos({ coverImage, obras }: { coverImage: string, ob
     const Carrossel = (props: { type: string, obras: Obra[] }) => {
         return (
             <Flex direction="column">
-                <Text as="h1" fontFamily="Poppins-Bold" p={6} fontSize="32px" className="underline-text-heading-right" fontWeight="bold">{props.type === 'construcao' ? "Construção" : props.type === 'reforma' ? "Reforma" : "Projeto"}</Text>
+                <Text as="h1" fontFamily="Oswald-Bold" p={6} fontSize="64px" className="underline-text-heading-left" fontWeight="bold">{props.type === 'construcao' ? "Construção" : props.type === 'reforma' ? "Reforma" : "Projeto"}</Text>
                 <Flex h="100%" maxW={justifyCenter ? "360px" : "1280px"} >
                     <Swiper direction="horizontal" slidesPerView={justifyCenter ? 1 : props.obras.filter((obra: Obra) => obra.type === props.type).length >= 3 ? 3 : props.obras.filter((obra: Obra) => obra.type === props.type).length} navigation={true} spaceBetween={6} modules={[Navigation]}>
                         {props.obras.filter((obra: Obra) => obra.type === props.type).sort((a: Obra, b: Obra) => a.ordem - b.ordem).map((obra: Obra) => {
                             return (
                                 <SwiperSlide key={obra._id} style={{ minWidth: '360px' }}  >
-                                    <ProjectCard title={obra.name} description={props.type === 'construcao' ? "Construção" : props.type === 'reforma' ? "Reforma" : "Projeto"} image={obra.mainImage ? obra.mainImage : obra.images[0]} slug={obra.slug} />
+                                    <ProjectCard
+                                        title={obra.name}
+                                        description={props.type === 'construcao' ? "Construção" : props.type === 'reforma' ? "Reforma" : "Projeto"}
+                                        image={obra.mainImage ? obra.mainImage : obra.images[0]}
+                                        slug={obra.slug}
+                                    />
                                 </SwiperSlide>
                             )
                         })}
@@ -39,7 +44,7 @@ export default function Projetos({ coverImage, obras }: { coverImage: string, ob
         )
     }
     return (
-        <Ligare image={coverImage ? coverImage : "./imgs/home2.jpg"} title="Projetos">
+        <Ligare image={coverImage ? coverImage : "./imgs/home2.jpg"} title="Projetos" text="O QUE FAZEMOS?" page="obras">
             <Flex mt="85px" mb="85px" alignItems="center" direction="column" gap={6} flexWrap='wrap'>
                 <Flex direction="column" gap={8} flexWrap='wrap' alignItems={justifyCenter ? "center" : "initial"}>
                     {obras.filter((obra) => obra.type === 'construcao').length ? (

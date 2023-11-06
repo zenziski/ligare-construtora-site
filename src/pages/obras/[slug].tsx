@@ -16,7 +16,7 @@ export default function Projeto() {
         onOpen()
     }
 
-    const getData = async () => {            
+    const getData = async () => {
         const result = await getObrasById(slug as string)
         setObra(result)
     }
@@ -28,17 +28,22 @@ export default function Projeto() {
     const isLargeScreen = useBreakpointValue({ base: false, lg: true });
 
     return (
-        obra && <Ligare image={obra.mainImage ? obra.mainImage : obra.images[0]} title="Projeto">
+        obra && <Ligare image={obra.mainImage ? obra.mainImage : obra.images[0]} title="Projeto" text={obra.name.toLocaleUpperCase()} page="obra">
             <Flex mb="85px" direction="column" gap={6} p="40px">
-                <Text as="h1" fontFamily="Poppins-Bold" p={4} fontSize={isLargeScreen ? "64px" : "48px"} className="underline-text-heading-right">Ficha técnica</Text>
-                <Flex direction="column">
-                    <Text fontFamily="Poppins-Regular"><b>Nome da obra:</b> {obra.name}</Text>
-                    <Text fontFamily="Poppins-Regular"><b>Tipo:</b> {obra.type === 'construcao' ? "Construção" : obra.type === 'reforma' ? "Reforma" : "Projeto"}</Text>
+                <Grid templateColumns={isLargeScreen ? "repeat(4, 1fr)" : "repeat(1, 1fr)"} gap={4} w="100%" h="100%">
+                    {obra.images?.map((element: any, index: any) => (
+                        <Image _hover={{ cursor: 'pointer', opacity: 0.8 }} transition="opacity 0.3s" onClick={handleOpenModal} src={element} w="100%" h="240px" key={index} loading="lazy" />
+                    ))}
+                </Grid>
+                <Text as="h1" fontFamily="Oswald-Bold" fontSize={isLargeScreen ? "48px" : "32px"}>Ficha técnica</Text>
+                <Flex direction="column" gap={1}>
+                    <Text fontFamily="Oswald-Bold" fontSize="24px">{obra.name}</Text>
+                    <Text fontFamily="Oswald-Regular"><b>Tipo:</b> {obra.type === 'construcao' ? "Construção" : obra.type === 'reforma' ? "Reforma" : "Projeto"}</Text>
                     {obra.data.length ? (
                         obra.data.map((data: any) => {
                             return (
                                 <Flex direction="column">
-                                    <Text fontFamily="Poppins-Regular"><b>{data.campo}:</b> {data.valor}</Text>
+                                    <Text fontFamily="Oswald-Regular"><b>{data.campo}:</b> {data.valor}</Text>
                                 </Flex>
                             )
                         })
@@ -53,11 +58,6 @@ export default function Projeto() {
                         )
                     }
                 </Flex>
-                <Grid templateColumns={isLargeScreen ? "repeat(4, 1fr)" : "repeat(1, 1fr)"} gap={4} w="100%" h="100%">
-                    {obra.images?.map((element: any, index: any) => (
-                        <Image _hover={{ cursor: 'pointer', opacity: 0.8 }} transition="opacity 0.3s" onClick={handleOpenModal} src={element} w="100%" h="240px" key={index} loading="lazy"/>
-                    ))}
-                </Grid>
             </Flex>
             {
                 isOpen ? (

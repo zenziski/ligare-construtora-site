@@ -14,14 +14,16 @@ const variants = {
 type Props = {
     children: ReactNode
     title: string,
-    image: string
+    image: string,
+    text: string
+    page: string
 }
 
 export default function Ligare(props: Props) {
     return (
         <Flex direction="column">
             <PageHead title={props.title} />
-            <Header image={props.image} />
+            <Header image={props.image} text={props.text} page={props.page} />
             <motion.main
                 initial="hidden"
                 animate="enter"
