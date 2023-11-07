@@ -11,6 +11,7 @@ export default function ModalCarousel(props: any) {
             <ModalOverlay />
             <ModalContent
                 maxW="720px"
+                margin={'auto'}
             >
                 <ModalCloseButton position="fixed" top="20px" size="lg" right="40px" zIndex={999999} />
                 <ModalBody p={0} display="flex" alignItems="center" justifyContent="center" h="100%">
