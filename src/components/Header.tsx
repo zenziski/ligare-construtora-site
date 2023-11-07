@@ -34,7 +34,7 @@ export default function Header(props: Props) {
         };
     }, []);
     const calculateFontSize = (text: string) => {
-        let minLengthForMaxFontSize = 10;
+        const minLengthForMaxFontSize = 10;
         const textLength = text.length;
         // You can adjust these values to fit your specific requirements
         const minFontSize = 150; // Minimum font size
