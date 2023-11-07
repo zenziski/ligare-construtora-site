@@ -33,7 +33,7 @@ export default function Ligare(props: Props) {
             >
                 {props.children}
             </motion.main>
-            <Footer />
+            <Footer title={props.title} />
         </Flex>
     )
 }
