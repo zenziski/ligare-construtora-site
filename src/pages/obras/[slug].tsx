@@ -7,6 +7,7 @@ import ModalCarousel from "@/components/carousel";
 
 export default function Projeto() {
     const [obra, setObra] = useState<any>(null)
+    const [initialSlide, setInitalSlide] = useState<number>(0)
     const router = useRouter();
     const { slug } = router.query;
 
@@ -30,11 +31,28 @@ export default function Projeto() {
     return (
         obra && <Ligare image={obra.mainImage ? obra.mainImage : obra.images[0]} title="Projeto" text={obra.name.toLocaleUpperCase()} page="obra">
             <Flex mb="85px" direction="column" gap={6} p="40px">
-                <Grid templateColumns={isLargeScreen ? "repeat(4, 1fr)" : "repeat(1, 1fr)"} gap={4} w="100%" h="100%">
-                    {obra.images?.map((element: any, index: any) => (
-                        <Image _hover={{ cursor: 'pointer', opacity: 0.8 }} transition="opacity 0.3s" onClick={handleOpenModal} src={element} w="100%" h="240px" key={index} loading="lazy" />
-                    ))}
-                </Grid>
+                {
+                    !isLargeScreen ? (
+                        <Grid templateColumns={isLargeScreen ? "repeat(4, 1fr)" : "repeat(1, 1fr)"} gap={4} w="100%" h="100%">
+                            {obra.images?.map((element: any, index: any) => (
+                                <Image _hover={{ cursor: 'pointer', opacity: 0.8 }} transition="opacity 0.3s" onClick={() => {
+                                    setInitalSlide(index)
+                                    handleOpenModal()
+                                }} src={element} w="100%" h="240px" key={index} loading="lazy" objectFit={'cover'} />
+                            ))}
+                        </Grid>
+                    ) : (
+                        <Flex gap={4} w="100%" h="100%" flexWrap={'wrap'}>
+                            {obra.images?.map((element: any, index: any) => (
+                                <Image _hover={{ cursor: 'pointer', opacity: 0.8 }} transition="opacity 0.3s" onClick={() => {
+                                    setInitalSlide(index)
+                                    handleOpenModal()
+                                }} src={element} w="auto" h="240px" key={index} loading="lazy" objectFit={'contain'} />
+                            ))}
+                        </Flex>
+                    )
+                }
+
                 <Text as="h1" fontFamily="Oswald-Bold" fontSize={isLargeScreen ? "48px" : "32px"}>Ficha técnica</Text>
                 <Flex direction="column" gap={1}>
                     <Text fontFamily="Oswald-Bold" fontSize="24px">{obra.name}</Text>
@@ -66,10 +84,11 @@ export default function Projeto() {
                         onClose={onClose}
                         title={'Galeria'}
                         images={obra.images}
+                        initialSlide={initialSlide}
                     />
                 ) : null
             }
 
-        </Ligare>
+        </Ligare >
     )
 }

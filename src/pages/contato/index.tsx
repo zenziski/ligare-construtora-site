@@ -8,6 +8,7 @@ export default function Home() {
     const [data, setData] = useState<any>({
         name: '',
         phone: '',
+        email: '',
         description: ''
     });
     const [loading, setLoading] = useState<boolean>(false);
@@ -43,33 +44,40 @@ export default function Home() {
     return (
         <Ligare image="/imgs/home1.jpg" title="Contato" text="ENTRE EM CONTATO" page="contato">
             <Flex mt="45px" mb="85px" pl={10} pr={10} gap={4} direction="column">
-                <Flex flexFlow='wrap' gap={4}>
+                <Flex gap={4} direction="column">
                     <Flex direction="column" gap={2} w={isLargeScreen ? "50%" : '100%'}>
                         <FormLabel>
-                            <Text fontFamily="Poppins-Medium">Nome Completo</Text>
+                            <Text fontFamily="Poppins-Medium">SEU NOME</Text>
                         </FormLabel>
-                        <Input value={data.name} fontFamily="Poppins-Regular" placeholder="Nome completo" onChange={(e) => handleData(e, 'name')} />
+                        <Input value={data.name} fontFamily="Poppins-Regular" placeholder="SEU NOME" onChange={(e) => handleData(e, 'name')} />
                     </Flex>
-                    <Flex direction="column" gap={2} w={isLargeScreen ? "" : '100%'} >
+                    <Flex direction="column" gap={2} w={isLargeScreen ? "50%" : '100%'} >
                         <FormLabel>
-                            <Text fontFamily="Poppins-Medium">Telefone/Celular</Text>
+                            <Text fontFamily="Poppins-Medium">TELEFONE</Text>
                         </FormLabel>
-                        <Input value={data.phone} fontFamily="Poppins-Regular" placeholder="Ex: (41) 99999-9999" onChange={(e) => handleData(e, 'phone')} />
+                        <Input value={data.phone} fontFamily="Poppins-Regular" placeholder="TELEFONE" onChange={(e) => handleData(e, 'phone')} />
+                    </Flex>
+                    <Flex direction="column" gap={2} w={isLargeScreen ? "50%" : '100%'} >
+                        <FormLabel>
+                            <Text fontFamily="Poppins-Medium">E-MAIL</Text>
+                        </FormLabel>
+                        <Input value={data.email} fontFamily="Poppins-Regular" placeholder="E-MAIL" onChange={(e) => handleData(e, 'email')} />
                     </Flex>
                 </Flex>
-                <Flex flexFlow='wrap' gap={8} alignItems="center">
-                    <Flex direction="column" gap={2} w={isLargeScreen ? "50%" : '100%'}>
-                        <FormLabel>
-                            <Text fontFamily="Poppins-Medium">Motivo do contato</Text>
-                        </FormLabel>
-                        <Textarea value={data.description} fontFamily="Poppins-Regular" onChange={(e) => handleData(e, 'description')} />
-                    </Flex>
-                    <Text fontSize="24px" cursor="pointer" fontFamily="Poppins-Medium" className="underline-text" onClick={() => {
-                        if (!loading) {
-                            save();
-                        }
-                    }}>Enviar</Text>
+
+                <Flex direction="column" gap={2} w={isLargeScreen ? "50%" : '100%'}>
+                    <FormLabel>
+                        <Text fontFamily="Poppins-Medium">E AÍ, NO QUE PODEMOS TE AJUDAR?</Text>
+                        <Text fontFamily="Poppins-Medium">SE JÁ TIVER PROJETOS, POR FAVOR, NOS ENVIE</Text>
+                    </FormLabel>
+                    <Textarea value={data.description} fontFamily="Poppins-Regular" onChange={(e) => handleData(e, 'description')} />
                 </Flex>
+                <Text w={isLargeScreen ? "50%" : '100%'} fontSize="24px" cursor="pointer" fontFamily="Poppins-Medium" className="underline-text" onClick={() => {
+                    if (!loading) {
+                        save();
+                    }
+                }}>Enviar</Text>
+
             </Flex>
 
         </Ligare>

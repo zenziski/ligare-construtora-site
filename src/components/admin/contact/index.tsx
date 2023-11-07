@@ -32,6 +32,7 @@ export default function Contacts() {
                         <Tr>
                             <Th>Nome</Th>
                             <Th>Telefone</Th>
+                            <Th>Email</Th>
                             <Th>Descrição</Th>
                         </Tr>
                     </Thead>
@@ -41,6 +42,7 @@ export default function Contacts() {
                                 <Tr>
                                     <Td>{item.name}</Td>
                                     <Td>{item.phone}</Td>
+                                    <Td>{item.email}</Td>
                                     <Td>{item.description}</Td>
                                 </Tr>
                             )
