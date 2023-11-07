@@ -3,11 +3,11 @@ import { Box, Flex, Link, Text, IconButton, useDisclosure } from "@chakra-ui/rea
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useState, useEffect } from "react";
 
-const HeaderMenu = ({ location }: { location: string }) => {
+const HeaderMenu = ({ location, isMobile }: { location: string, isMobile: boolean }) => {
     return (
         <Flex h="40px" zIndex={4}>
             <Link href={`/${location == "Sobre nós" ? "#sobre-nos" : createSlug(location)}`}>
-                <Text fontSize="24px" fontFamily="Oswald-Regular" className="underline-animation" cursor="pointer" color="black">{location}</Text>
+                <Text fontSize="24px" fontFamily="Oswald-Regular" className="underline-animation" cursor="pointer" color={isMobile ? "white" : "black"}>{location}</Text>
             </Link>
         </Flex >
     )
@@ -36,11 +36,8 @@ export default function Header(props: Props) {
     const calculateFontSize = (text: string) => {
         const minLengthForMaxFontSize = 10;
         const textLength = text.length;
-        // You can adjust these values to fit your specific requirements
-        const minFontSize = 150; // Minimum font size
-        const maxFontSize = 150; // Maximum font size
-
-        // Calculate font size based on text length
+        const minFontSize = 150;
+        const maxFontSize = 150;
         const fontSize =
             textLength <= minLengthForMaxFontSize
                 ? minFontSize
@@ -51,11 +48,9 @@ export default function Header(props: Props) {
     const logoProps = {
         color: ["obras", "obra"].includes(props.page) ? "gray.200" : "white",
         fontFamily: "Oswald-Bold",
-        fontSize: isMobile ?
-            "120px" :
-            props.page === "home" ? "500px" : calculateFontSize(props.text),
-        lineHeight: isMobile ? "300%" : (["obras", "obra"].includes(props.page) ? "48%" : "1"),
-        opacity: ["obras", "obra"].includes(props.page) ? "0.8" : "1",
+        fontSize: props.page === "home" ? "500px" : props.page === "obras" && isMobile ? "90px" : isMobile ? "120px" : calculateFontSize(props.text),
+        lineHeight: isMobile ? "100%" : (["obras", "obra"].includes(props.page) ? "100%" : "1"),
+        opacity: ["obras", "obra"].includes(props.page) ? "0.9" : "1",
     }
 
 
@@ -67,7 +62,7 @@ export default function Header(props: Props) {
             justifyContent="flex-end"
             alignItems="center"
             height="80vh" p={10}
-            bg={`url('${props.image}')`} backgroundSize={"cover"} backgroundPosition="center" backgroundRepeat="no-repeat"
+            bg={`url('${props.image}')`} backgroundSize="cover" backgroundPosition="center" backgroundRepeat="no-repeat"
         >
             {/* logo */}
             <Text
@@ -90,7 +85,7 @@ export default function Header(props: Props) {
                             display={isOpen ? 'none' : ''}
                             position="absolute"
                             left="85%"
-
+                            top="15px"
                         />
                         <Box
                             pos='fixed'
@@ -121,10 +116,10 @@ export default function Header(props: Props) {
                                 mt="-250px"
                                 h="100vh"
                             >
-                                <HeaderMenu location="Home" />
-                                <HeaderMenu location="Obras" />
-                                <HeaderMenu location="Sobre nós" />
-                                <HeaderMenu location="Contato" />
+                                <HeaderMenu isMobile={isMobile} location="Home" />
+                                <HeaderMenu isMobile={isMobile} location="Obras" />
+                                <HeaderMenu isMobile={isMobile} location="Sobre nós" />
+                                <HeaderMenu isMobile={isMobile} location="Contato" />
                             </Flex>
                         </Box>
                     </>
@@ -142,10 +137,10 @@ export default function Header(props: Props) {
                         boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
                         backdropFilter="blur(6px)"
                     >
-                        <HeaderMenu location="Home" />
-                        <HeaderMenu location="Obras" />
-                        <HeaderMenu location="Sobre nós" />
-                        <HeaderMenu location="Contato" />
+                        <HeaderMenu isMobile={isMobile} location="Home" />
+                        <HeaderMenu isMobile={isMobile} location="Obras" />
+                        <HeaderMenu isMobile={isMobile} location="Sobre nós" />
+                        <HeaderMenu isMobile={isMobile} location="Contato" />
                     </Flex>
                 )
             }

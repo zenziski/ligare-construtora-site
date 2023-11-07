@@ -30,7 +30,7 @@ export default function Projeto() {
 
     return (
         obra && <Ligare image={obra.mainImage ? obra.mainImage : obra.images[0]} title="Projeto" text={obra.name.toLocaleUpperCase()} page="obra">
-            <Flex mb="85px" direction="column" gap={6} p="40px">
+            <Flex mb="85px" direction="column" gap={6} p="10px" pt="15px">
                 {
                     !isLargeScreen ? (
                         <Grid templateColumns={isLargeScreen ? "repeat(4, 1fr)" : "repeat(1, 1fr)"} gap={4} w="100%" h="100%">
