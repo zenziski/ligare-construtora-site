@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import ProjectCard from "@/components/ProjectCard";
 import { getDataHome } from "@/_services/home.service";
+import { useEffect, useState } from "react";
 
 type Obra = {
     _id: string,
@@ -17,13 +18,25 @@ type Obra = {
 }
 
 export default function Projetos({ coverImage, obras }: { coverImage: string, obras: Obra[] }) {
+    const [isMobile, setIsMobile] = useState<boolean>(false);
+
+    const handleResize = () => {
+        setIsMobile(window.innerWidth <= 768); // Defina o ponto de interrupção para dispositivos móveis conforme necessário
+    };
+    useEffect(() => {
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     const justifyCenter = useBreakpointValue({ base: true, lg: false });
 
     const Carrossel = (props: { type: string, obras: Obra[] }) => {
         return (
             <Flex direction="column">
-                <Text as="h1" fontFamily="Oswald-Bold" p={6} fontSize="64px" className="underline-text-heading-left" fontWeight="bold">{props.type === 'construcao' ? "Construção" : props.type === 'reforma' ? "Reforma" : "Projeto"}</Text>
+                <Text as="h1" fontFamily="Oswald-Bold" p={6} fontSize={isMobile ? "32px" : "64px"} className="underline-text-heading-left" fontWeight="bold">{props.type === 'construcao' ? "Construção" : props.type === 'reforma' ? "Reforma" : "Projeto"}</Text>
                 <Flex h="100%" maxW={justifyCenter ? "360px" : "1280px"} >
                     <Swiper direction="horizontal" slidesPerView={justifyCenter ? 1 : props.obras.filter((obra: Obra) => obra.type === props.type).length >= 3 ? 3 : props.obras.filter((obra: Obra) => obra.type === props.type).length} navigation={true} spaceBetween={6} modules={[Navigation]}>
                         {props.obras.filter((obra: Obra) => obra.type === props.type).sort((a: Obra, b: Obra) => a.ordem - b.ordem).map((obra: Obra) => {
@@ -34,6 +47,7 @@ export default function Projetos({ coverImage, obras }: { coverImage: string, ob
                                         description={props.type === 'construcao' ? "Construção" : props.type === 'reforma' ? "Reforma" : "Projeto"}
                                         image={obra.mainImage ? obra.mainImage : obra.images[0]}
                                         slug={obra.slug}
+                                        showDescription={false}
                                     />
                                 </SwiperSlide>
                             )

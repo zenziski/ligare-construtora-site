@@ -4,7 +4,7 @@ export default function FooterObras() {
     return (
         <Flex color="white" minH="270px" p={3} bg="black" direction="column">
             <Flex gap="50px" flexWrap='wrap' alignItems={'center'} fontWeight={'bold'} fontSize={'1.8rem'}>
-                <Image src="/imgs/logo_no_bg.png" w="250x" h="250px" />
+                <Image src="/imgs/logo_branco.webp" w="250x" h="250px" />
                 <Flex direction="column" >
                     <Text>um pouco de humor</Text>
                     <Text>um pouco de drama</Text>
@@ -12,11 +12,13 @@ export default function FooterObras() {
                     <Flex direction="column">
                         <Flex alignItems={'center'}>
                             <Link href="https://www.instagram.com/relaxa.estamos.emobras/">
-                                <Image h="43px" src="/icons/instagram.svg" />
+                                <Image h="43px" src="/icons/instagram.svg" mr={2}/>
                             </Link>
                             <Text>siga a gente nas redes socias</Text>
                         </Flex>
-                        <Text>@relaxa.estamos.emobras</Text>
+                        <Link href="https://www.instagram.com/relaxa.estamos.emobras/">
+                            <Text>@relaxa.estamos.emobras</Text>
+                        </Link>
                     </Flex>
                 </Flex>
             </Flex>

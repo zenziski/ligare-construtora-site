@@ -4,6 +4,7 @@ import { Button, Image, Card, Modal, ModalBody, ModalCloseButton, ModalContent, 
 import { getImages } from "@/_services/galery.service";
 import { useValidation } from "@/_hooks/useValidate";
 import PaginationComponent from "@/components/Pagination";
+import MiniLoading from "@/components/miniLoading";
 
 export default function SelectImages(props: any) {
 
@@ -40,7 +41,7 @@ export default function SelectImages(props: any) {
         if (isOpen) {
             handleImages()
         }
-    }, [isOpen])
+    }, [isOpen, currentPage])
 
     return (
         <>
@@ -54,25 +55,27 @@ export default function SelectImages(props: any) {
                     <ModalHeader>Imagens da Galeria</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Flex flexFlow='wrap' justifyContent='center'>
-                            {
-                                images.map((image: any) => {
-                                    return (
-                                        <Card m={1} p={2}>
-                                            <Flex justifyContent='flex-end'>
-                                                <Checkbox isChecked={selectedImage === image.location} onChange={() => handleSelectImages(image.location)} m={2} position='absolute' />
-                                            </Flex>
-                                            <Image width='180px' height='180px' src={image.location} />
-                                        </Card>
-                                    )
-                                })
-                            }
-                        </Flex>
-                        <PaginationComponent
-                            currentPage={currentPage}
-                            totalPages={Math.ceil(total / perPage)}
-                            onPageChange={handlePageChange}
-                        />
+                        <>
+                            <Flex flexFlow='wrap' justifyContent='center'>
+                                {
+                                    images.map((image: any, index: number) => {
+                                        return (
+                                            <Card m={1} p={2} key={`${currentPage}${index}`}>
+                                                <Flex justifyContent='flex-end'>
+                                                    <Checkbox isChecked={selectedImage === image.location} onChange={() => handleSelectImages(image.location)} m={2} position='absolute' />
+                                                </Flex>
+                                                <Image width='180px' height='180px' src={image.location} />
+                                            </Card>
+                                        )
+                                    })
+                                }
+                            </Flex>
+                            <PaginationComponent
+                                currentPage={currentPage}
+                                totalPages={Math.ceil(total / perPage)}
+                                onPageChange={handlePageChange}
+                            />
+                        </>
                     </ModalBody>
                     <ModalFooter>
                         <Button colorScheme='blue' mr={3} onClick={handleSave} >

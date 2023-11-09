@@ -6,7 +6,8 @@ interface ProjectCardProps {
     title: string;
     description: string;
     image: string;
-    slug?: string
+    slug?: string;
+    showDescription?: boolean;
 }
 export default function ProjectCard(props: ProjectCardProps) {
     const router = useRouter();
@@ -30,7 +31,9 @@ export default function ProjectCard(props: ProjectCardProps) {
             </Box>
             <Box ml={1}>
                 <Text fontSize="32px" fontFamily="Oswald-Bold">{props.title}</Text>
-                <Text fontSize="24px" fontFamily="Oswald-Light">{props.description}</Text>
+                {props.showDescription ? (
+                    <Text fontSize="24px" fontFamily="Oswald-Light">{props.description}</Text>
+                ) : (null)}
             </Box>
 
         </Flex>

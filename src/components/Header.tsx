@@ -34,7 +34,7 @@ export default function Header(props: Props) {
         };
     }, []);
     const calculateFontSize = (text: string) => {
-        const minLengthForMaxFontSize = 10;
+        const minLengthForMaxFontSize = 5;
         const textLength = text.length;
         const minFontSize = 150;
         const maxFontSize = 150;
@@ -46,11 +46,24 @@ export default function Header(props: Props) {
         return fontSize;
     };
     const logoProps = {
-        color: ["obras", "obra"].includes(props.page) ? "gray.200" : "white",
+        color: "white",
         fontFamily: "Oswald-Bold",
-        fontSize: props.page === "home" ? "500px" : props.page === "obras" && isMobile ? "90px" : isMobile ? "120px" : calculateFontSize(props.text),
-        lineHeight: isMobile ? "100%" : (["obras", "obra"].includes(props.page) ? "100%" : "1"),
-        opacity: ["obras", "obra"].includes(props.page) ? "0.9" : "1",
+        /* fontSize: props.page === "home" && isMobile
+            ? "140px"
+            : props.page === "home" && !isMobile
+                ? "550px"
+                : props.page === "obras" && isMobile
+                    ? "90px"
+                    : isMobile
+                        ? "120px"
+                        : calculateFontSize(props.text), */
+        fontSize: props.page === "home" ? "30vw" : "10vw",
+        lineHeight: props.page === "home" && !isMobile
+            ? "85%"
+            : props.page === "home" && isMobile
+                ? "50%"
+                : "40%",
+        opacity: 1,
     }
 
 
@@ -61,8 +74,8 @@ export default function Header(props: Props) {
             direction="column"
             justifyContent="flex-end"
             alignItems="center"
-            height="80vh" p={10}
-            bg={`url('${props.image}')`} backgroundSize="cover" backgroundPosition="center" backgroundRepeat="no-repeat"
+            height={isMobile ? "30vh" : "80vh"} p={10}
+            bg={`url('${props.image}')`} backgroundSize="cover" backgroundPosition="center top" backgroundRepeat="no-repeat"
         >
             {/* logo */}
             <Text
