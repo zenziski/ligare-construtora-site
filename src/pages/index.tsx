@@ -2,6 +2,7 @@ import { getDataHome } from "@/_services/home.service";
 import Ligare from "@/components/Ligare";
 import ProjectCard from "@/components/ProjectCard";
 import { Flex, Link, Text, Image } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
 
 type Obras = {
   name: string,
@@ -19,22 +20,35 @@ type HomeData = {
 }
 
 export default function Home({ data }: { data: HomeData }) {
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Defina o ponto de interrupção para dispositivos móveis conforme necessário
+  };
+
+  useEffect(() => {
+      handleResize();
+      window.addEventListener("resize", handleResize);
+      return () => {
+          window.removeEventListener("resize", handleResize);
+      };
+  }, []);
   return (
     data && (
       <Ligare image={data.imagemPrincipal} title="Página Inicial" text="LIGARE" page="home">
         <Flex mt="85px" alignItems="center" direction="column">
           <Text fontFamily="Oswald-Bold" fontSize="48px" mb={10} id="sobre-nos">QUEM SOMOS?</Text>
-          <Flex w="65%" direction="column" alignItems="center">
-            <Text align="center" fontFamily="Poppins-Light" fontWeight="bold" fontSize="24px">
+          <Flex w="70%" direction="column" alignItems="center" fontSize={isMobile ? "16px" : "24px"}>
+            <Text align="center" fontFamily="Poppins-Light" fontWeight="bold" >
               A Ligare Construtora tem uma história de mais de 10 anos atuando no mercado  de construção e reforma em Curitiba e região.
             </Text>
-            <Text align="center" fontFamily="Poppins-Light" fontWeight="bold" fontSize="24px">
+            <Text align="center" fontFamily="Poppins-Light" fontWeight="bold" >
               Buscamos apresentar soluções completas para a sua obra residencial ou comercial e por isso oferecemos além da execução e gestão de obra, os serviços de elaboração, gestão e consultoria para projetos arquitetônicos e complementares.
             </Text>
-            <Text mb="30px" align="center" fontFamily="Poppins-Light" fontWeight="bold" fontSize="24px">
+            <Text mb="30px" align="center" fontFamily="Poppins-Light" fontWeight="bold" >
               Somos obstinados em trazer para os nossos clientes soluções viáveis e racionais durante toda a obra, além de prezar pela transparência de todos os nossos processos.
             </Text>
-            <Text align="center" fontFamily="Poppins-Light" fontWeight="bold" fontSize="24px">
+            <Text align="center" fontFamily="Poppins-Light" fontWeight="bold" >
               Você é o centro da sua própria obra e participará de todas das tomadas de decisões, além de receber reportes periódicos e ter acesso ao controle financeiro a qualquer momento.
             </Text>
           </Flex>
@@ -68,7 +82,7 @@ export default function Home({ data }: { data: HomeData }) {
 export const getServerSideProps = async ({ _req, res }: { _req: any, res: any }) => {
   res.setHeader(
     'Cache-Control',
-    'public, s-maxage=30, stale-while-revalidate=59'
+    'public, s-maxage=30, stale-while-revalidate=360'
   )
   let response = await getDataHome();
   response = {

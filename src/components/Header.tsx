@@ -33,18 +33,7 @@ export default function Header(props: Props) {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
-    const calculateFontSize = (text: string) => {
-        const minLengthForMaxFontSize = 5;
-        const textLength = text.length;
-        const minFontSize = 150;
-        const maxFontSize = 150;
-        const fontSize =
-            textLength <= minLengthForMaxFontSize
-                ? minFontSize
-                : minFontSize + (maxFontSize - minFontSize) * (textLength / minLengthForMaxFontSize);
 
-        return fontSize;
-    };
     const logoProps = {
         color: "white",
         fontFamily: "Oswald-Bold",
@@ -59,9 +48,9 @@ export default function Header(props: Props) {
                         : calculateFontSize(props.text), */
         fontSize: props.page === "home" ? "30vw" : "10vw",
         lineHeight: props.page === "home" && !isMobile
-            ? "85%"
+            ? "65%"
             : props.page === "home" && isMobile
-                ? "50%"
+                ? "20%"
                 : "40%",
         opacity: 1,
     }
@@ -74,7 +63,7 @@ export default function Header(props: Props) {
             direction="column"
             justifyContent="flex-end"
             alignItems="center"
-            height={isMobile ? "30vh" : "80vh"} p={10}
+            height={isMobile ? "30vh" : "100vh"} p={10}
             bg={`url('${props.image}')`} backgroundSize="cover" backgroundPosition="center top" backgroundRepeat="no-repeat"
         >
             {/* logo */}

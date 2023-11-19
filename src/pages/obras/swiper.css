@@ -7,7 +7,12 @@
   height: 1.2rem;
 }
 
-
 .swiper-pagination-bullet-active {
   background-color: #ecc94b;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }

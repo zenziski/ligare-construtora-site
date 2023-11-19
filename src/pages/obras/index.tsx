@@ -17,7 +17,7 @@ type Obra = {
     ordem: number
 }
 
-export default function Projetos({ coverImage, obras }: { coverImage: string, obras: Obra[] }) {
+export default function Projetos({ capaObras, obras }: { capaObras: string, obras: Obra[] }) {
     const [isMobile, setIsMobile] = useState<boolean>(false);
 
     const handleResize = () => {
@@ -58,7 +58,7 @@ export default function Projetos({ coverImage, obras }: { coverImage: string, ob
         )
     }
     return (
-        <Ligare image={coverImage ? coverImage : "./imgs/home2.jpg"} title="Projetos" text="O QUE FAZEMOS?" page="obras">
+        <Ligare image={capaObras ? capaObras : "./imgs/home2.jpg"} title="Projetos" text="O QUE FAZEMOS?" page="obras">
             <Flex mt="85px" mb="85px" alignItems="center" direction="column" gap={6} flexWrap='wrap'>
                 <Flex direction="column" gap={8} flexWrap='wrap' alignItems={justifyCenter ? "center" : "initial"}>
                     {obras.filter((obra) => obra.type === 'construcao').length ? (
@@ -80,7 +80,7 @@ export default function Projetos({ coverImage, obras }: { coverImage: string, ob
 export const getServerSideProps = async ({ req, res }: { req: any, res: any }) => {
     res.setHeader(
         'Cache-Control',
-        'public, s-maxage=30, stale-while-revalidate=59'
+        'public, s-maxage=30, stale-while-revalidate=360'
     )
     const { capaObras } = await getDataHome();
     const obras = await getObras()
