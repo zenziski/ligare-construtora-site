@@ -82,7 +82,7 @@ export default function Home() {
                     </FormLabel>
                     <Textarea value={data.description} fontFamily="Poppins-Regular" onChange={(e) => handleData(e, 'description')} />
                 </Flex>
-                <Text w={isLargeScreen ? "50%" : '100%'} fontSize="24px" cursor="pointer" fontFamily="Poppins-Medium" bg="primary" p={2} borderRadius={5} onClick={() => {
+                <Text w="90px" fontSize="24px" cursor="pointer" fontFamily="Poppins-Medium" bg="primary" p={2} borderRadius={5} onClick={() => {
                     if (!loading) {
                         save();
                     }
