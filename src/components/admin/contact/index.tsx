@@ -4,6 +4,7 @@ import { Wrapper } from "@/components/wrapper";
 import { useValidation } from "@/_hooks/useValidate";
 import { getContacts } from "@/_services/contact.service";
 import MiniLoading from "@/components/miniLoading";
+import EditContactImage from "./modais/EditContactImage";
 
 export default function Contacts() {
     const [contacts, setContacts] = useState([]);
@@ -25,7 +26,8 @@ export default function Contacts() {
     }, [])
 
     return (
-        contacts.length ? <Wrapper title="Galeria">
+        contacts.length ? <Wrapper title="Contatos">
+            <EditContactImage />
             <Flex padding={2} flexDirection='column' gap={4}>
                 <Table>
                     <Thead>
@@ -39,7 +41,7 @@ export default function Contacts() {
                     <Tbody>
                         {contacts.map((item: any) => {
                             return (
-                                <Tr>
+                                <Tr key={item._id}>
                                     <Td>{item.name}</Td>
                                     <Td>{item.phone}</Td>
                                     <Td>{item.email}</Td>
