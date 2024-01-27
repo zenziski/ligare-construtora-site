@@ -11,13 +11,13 @@ export default function FooterObras() {
                     <Text>e muito pó</Text>
                     <Flex direction="column">
                         <Flex alignItems={'center'}>
-                            <Link href="https://www.instagram.com/relaxa.estamos.emobras/">
+                            <Link href="https://www.instagram.com/relaxa.estamosemobras/">
                                 <Image h="43px" src="/icons/instagram.svg" mr={2}/>
                             </Link>
-                            <Text>siga a gente nas redes socias</Text>
+                            <Text>siga a gente nas redes sociais</Text>
                         </Flex>
-                        <Link href="https://www.instagram.com/relaxa.estamos.emobras/">
-                            <Text>@relaxa.estamos.emobras</Text>
+                        <Link href="https://www.instagram.com/relaxa.estamosemobras/">
+                            <Text>@relaxa.estamosemobras</Text>
                         </Link>
                     </Flex>
                 </Flex>

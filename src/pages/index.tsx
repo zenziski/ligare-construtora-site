@@ -23,15 +23,15 @@ export default function Home({ data }: { data: HomeData }) {
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Defina o ponto de interrupção para dispositivos móveis conforme necessário
+    setIsMobile(window.innerWidth <= 768); // Defina o ponto de interrupção para dispositivos móveis conforme necessário
   };
 
   useEffect(() => {
-      handleResize();
-      window.addEventListener("resize", handleResize);
-      return () => {
-          window.removeEventListener("resize", handleResize);
-      };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
   return (
     data && (
@@ -43,16 +43,16 @@ export default function Home({ data }: { data: HomeData }) {
               A Ligare Construtora tem uma história de mais de 10 anos atuando no mercado  de construção e reforma em Curitiba e região.
             </Text>
             <Text align="center" fontFamily="Poppins-Light" fontWeight="bold" >
-              Buscamos apresentar soluções completas para a sua obra residencial ou comercial e por isso oferecemos além da execução e gestão de obra, os serviços de elaboração, gestão e consultoria para projetos arquitetônicos e complementares.
+              Buscamos apresentar soluções completas para a sua obra residencial ou comercial e para isso oferecemos os serviços de execução e gerenciamento de obra, e também de elaboração, gestão e consultoria para projetos arquitetônicos e complementares.
             </Text>
             <Text mb="30px" align="center" fontFamily="Poppins-Light" fontWeight="bold" >
-              Somos obstinados em trazer para os nossos clientes soluções viáveis e racionais durante toda a obra, além de prezar pela transparência de todos os nossos processos.
+              Somos obstinados em trazer para os nossos clientes soluções viáveis e racionais durante toda a obra, além de prezar pela transparência de todos os nossos processos. 
             </Text>
             <Text align="center" fontFamily="Poppins-Light" fontWeight="bold" >
-              Você é o centro da sua própria obra e participará de todas das tomadas de decisões, além de receber reportes periódicos e ter acesso ao controle financeiro a qualquer momento.
+              Você é o centro da sua própria obra e participará de todas as tomadas de decisão, além de receber reportes periódicos e ter acesso ao controle financeiro a qualquer momento.
             </Text>
           </Flex>
-          <Image src="./imgs/logo_text.png" w="150px" h="150px" mb={20} />
+          <Image src="./imgs/logo_text.png" w="300px" h="300px" mb={5} />
         </Flex>
         <Flex alignItems="center" direction="column" gap={8} mb="100px">
           <Text as="h1" fontFamily="Oswald-Bold" fontSize="48px">O QUE FAZEMOS?</Text>

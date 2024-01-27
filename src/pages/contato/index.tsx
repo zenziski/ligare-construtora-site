@@ -78,7 +78,6 @@ export default function Home() {
                 <Flex direction="column" gap={2} w={isLargeScreen ? "50%" : '100%'}>
                     <FormLabel>
                         <Text fontFamily="Poppins-Medium">E AÍ, NO QUE PODEMOS TE AJUDAR?</Text>
-                        <Text fontFamily="Poppins-Medium">SE JÁ TIVER PROJETOS, POR FAVOR, NOS ENVIE</Text>
                     </FormLabel>
                     <Textarea value={data.description} fontFamily="Poppins-Regular" onChange={(e) => handleData(e, 'description')} />
                 </Flex>

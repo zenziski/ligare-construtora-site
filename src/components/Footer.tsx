@@ -23,11 +23,11 @@ export default function Footer(props: Props) {
                             <Text>+55 (41) 9 9934-9982</Text>
                         </Flex>
                         <Flex direction="column" fontFamily="Poppins-Regular" gap={1} justifyContent={'center'} alignItems={'center'}>
-                            <Link href="https://www.instagram.com/relaxa.estamos.emobras/">
+                            <Link href="https://www.instagram.com/relaxa.estamosemobras/">
                                 <Image h="43px" src="/icons/instagram.svg" />
                             </Link>
-                            <Link href="https://www.instagram.com/relaxa.estamos.emobras/">
-                                <Text>@relaxa.estamos.emobras</Text>
+                            <Link href="https://www.instagram.com/relaxa.estamosemobras/">
+                                <Text>@relaxa.estamosemobras</Text>
                             </Link>
                         </Flex>
                     </Flex>
