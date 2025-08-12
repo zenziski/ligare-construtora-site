@@ -43,7 +43,7 @@ export default function ModernGallery() {
   const [refreshTrigger, setRefreshTrigger] = useState(false);
   
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef = useRef<HTMLButtonElement>(null);
+  const cancelRef = useRef<any>(null);
   const toast = useToast();
   const sysValidation = useValidation();
   
