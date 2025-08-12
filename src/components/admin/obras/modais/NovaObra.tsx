@@ -1,6 +1,40 @@
 import { useEffect, useState } from "react";
 import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
-import { Button, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, useToast, FormLabel, Text, Input, Select, Grid, GridItem } from "@chakra-ui/react";
+import { 
+    Button, 
+    Image, 
+    Modal, 
+    ModalBody, 
+    ModalCloseButton, 
+    ModalContent, 
+    ModalFooter, 
+    ModalHeader, 
+    ModalOverlay, 
+    useDisclosure, 
+    Flex, 
+    useToast, 
+    FormLabel, 
+    Text, 
+    Input, 
+    Select, 
+    Grid, 
+    GridItem,
+    VStack,
+    HStack,
+    Card,
+    CardBody,
+    CardHeader,
+    Heading,
+    Badge,
+    IconButton,
+    useColorModeValue,
+    Box,
+    FormControl,
+    FormHelperText,
+    Alert,
+    AlertIcon
+} from "@chakra-ui/react";
+import { FiPlus, FiTrash2, FiImage, FiAlertCircle } from 'react-icons/fi';
 import { useValidation } from "@/_hooks/useValidate";
 import { createSlug } from "@/utils/createSlug";
 import AddImages from "./AddImages";
@@ -17,6 +51,10 @@ export default function NovaObra(props: any) {
     const toast = useToast();
     const sysValidation = useValidation();
     const [isLoading, setIsLoading] = useState(false);
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const cardBg = useColorModeValue('white', 'gray.800');
+    const borderColor = useColorModeValue('gray.200', 'gray.600');
 
     const [inputs, setInputs] = useState<{ campo: string; valor: string }[]>([]);
     const [campo, setCampo] = useState("");
@@ -27,6 +65,24 @@ export default function NovaObra(props: any) {
         setInputs((prevInputs) => [...prevInputs, newInputPair]);
         setCampo("");
         setValor("");
+    };
+
+    const getTypeColor = (type: string) => {
+        switch (type) {
+            case 'reforma': return 'orange';
+            case 'construcao': return 'green';
+            case 'projeto': return 'blue';
+            default: return 'gray';
+        }
+    };
+
+    const getTypeLabel = (type: string) => {
+        switch (type) {
+            case 'reforma': return 'Reforma';
+            case 'construcao': return 'Construção';
+            case 'projeto': return 'Projeto';
+            default: return type;
+        }
     };
 
     const getSlugs = async () => {
@@ -79,6 +135,7 @@ export default function NovaObra(props: any) {
                     duration: 5000,
                 });
                 onClose()
+                props.flushook(true)
             } catch (error) {
                 toast({
                     title: "Erro!",
@@ -88,135 +145,258 @@ export default function NovaObra(props: any) {
                 });
             }
         })
-        props.flushook(true)
         setIsLoading(false)
     }
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    
+    const resetForm = () => {
+        setNome('');
+        setSlug('');
+        setType('construcao');
+        setImages([]);
+        setInputs([]);
+        setCampo('');
+        setValor('');
+        setVinculo("64b87095c2b4169134de5e8a");
+    };
+
+    const handleClose = () => {
+        resetForm();
+        onClose();
+    };
+
     return (
         <>
-            <Button mr={2} cursor="pointer" onClick={onOpen} height='40px' width='60px' colorScheme="green" variant="outline">
-                <AddIcon />
+            <Button 
+                leftIcon={<FiPlus />}
+                cursor="pointer" 
+                onClick={onOpen} 
+                colorScheme="blue"
+                size="md"
+            >
+                Nova Obra
             </Button>
 
-
-            <Modal size="2xl" isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay bg="blackAlpha.500" backdropFilter="blur(10px)" />
-                <ModalContent>
-                    <ModalHeader fontFamily="Poppins-Medium">Adicionar nova obra</ModalHeader>
+            <Modal size="4xl" isOpen={isOpen} onClose={handleClose}>
+                <ModalOverlay bg="blackAlpha.600" backdropFilter="blur(10px)" />
+                <ModalContent maxH="90vh" overflowY="auto">
+                    <ModalHeader>
+                        <HStack spacing={3}>
+                            <FiPlus />
+                            <Heading size="lg">Criar Nova Obra</Heading>
+                            <Badge colorScheme={getTypeColor(type)} variant="subtle">
+                                {getTypeLabel(type)}
+                            </Badge>
+                        </HStack>
+                    </ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody>
-                        <Flex flexFlow='wrap' gap={4}>
-                            <Flex direction="column" gap={2} w="50%">
-                                <FormLabel>
-                                    <Text fontFamily="Poppins-Medium">Nome da Obra</Text>
-                                </FormLabel>
-                                <Input placeholder="Nome da obra" value={nome} onChange={(e) => handleNome(e)} />
-                            </Flex>
-                            <Flex direction="column" gap={2}>
-                                <FormLabel>
-                                    <Text fontFamily="Poppins-Medium">Slug</Text>
-                                </FormLabel>
-                                <Input placeholder="Slug" value={slug} onChange={(e) => setSlug(e.target.value)} />
-                                {slugError ? (
-                                    <Text color={"red"}>Slug já existente</Text>
-                                ) : null}
-                            </Flex>
-                        </Flex>
-                        <Flex flexFlow='wrap' gap={4} mt={4}>
-                            <Flex direction="column" gap={2} w="50%">
-                                <FormLabel>
-                                    <Text fontFamily="Poppins-Medium">Descrição</Text>
-                                </FormLabel>
-                                <Select value={type} onChange={(e) => setType(e.currentTarget.value)}>
-                                    <option value="construcao">Construção</option>
-                                    <option value="reforma">Reforma</option>
-                                    <option value="projeto">Projeto</option>
-                                </Select>
-                            </Flex>
-                        </Flex>
-                        <Flex flexFlow='wrap' gap={4} mt={4}>
-                            <Flex direction="column" gap={2}>
-                                <>
-                                    {inputs.map((inputPair, index) => (
-                                        <Flex key={index} direction="row" gap={4} alignItems="center">
-                                            <Input
-                                                value={inputPair.campo}
-                                                onChange={(e) =>
-                                                    setInputs((prevInputs) =>
-                                                        prevInputs.map((input, i) =>
-                                                            i === index ? { ...input, campo: e.target.value } : input
-                                                        )
-                                                    )
-                                                }
-                                                placeholder="Campo"
-                                            />
-                                            <Input
-                                                value={inputPair.valor}
-                                                onChange={(e) =>
-                                                    setInputs((prevInputs) =>
-                                                        prevInputs.map((input, i) =>
-                                                            i === index ? { ...input, valor: e.target.value } : input
-                                                        )
-                                                    )
-                                                }
-                                                placeholder="Valor"
-                                            />
-                                            <DeleteIcon cursor="pointer" onClick={() => setInputs((prevInputs) => prevInputs.filter((_, i) => i !== index))} />
-                                        </Flex>
+                    <ModalBody pb={6}>
+                        <VStack spacing={6} align="stretch">
+                            {/* Basic Information Card */}
+                            <Card bg={cardBg}>
+                                <CardHeader pb={3}>
+                                    <Heading size="md">Informações Básicas</Heading>
+                                </CardHeader>
+                                <CardBody pt={0}>
+                                    <VStack spacing={4} align="stretch">
+                                        <HStack spacing={4} align="start">
+                                            <FormControl flex={2} isRequired>
+                                                <FormLabel fontWeight="semibold">Nome da Obra</FormLabel>
+                                                <Input 
+                                                    placeholder="Digite o nome da obra" 
+                                                    value={nome} 
+                                                    onChange={(e) => handleNome(e)}
+                                                    size="md"
+                                                />
+                                            </FormControl>
+                                            <FormControl flex={1}>
+                                                <FormLabel fontWeight="semibold">Slug</FormLabel>
+                                                <Input 
+                                                    placeholder="URL amigável" 
+                                                    value={slug} 
+                                                    onChange={(e) => setSlug(e.target.value)}
+                                                    size="md"
+                                                    isInvalid={slugError}
+                                                />
+                                                {slugError ? (
+                                                    <FormHelperText color="red.500">
+                                                        <HStack spacing={1}>
+                                                            <FiAlertCircle />
+                                                            <Text>Este slug já existe</Text>
+                                                        </HStack>
+                                                    </FormHelperText>
+                                                ) : (
+                                                    <FormHelperText>URL amigável para a obra</FormHelperText>
+                                                )}
+                                            </FormControl>
+                                        </HStack>
+                                        <HStack spacing={4}>
+                                            <FormControl isRequired>
+                                                <FormLabel fontWeight="semibold">Tipo de Projeto</FormLabel>
+                                                <Select value={type} onChange={(e) => setType(e.currentTarget.value)} size="md">
+                                                    <option value="construcao">Construção</option>
+                                                    <option value="reforma">Reforma</option>
+                                                    <option value="projeto">Projeto</option>
+                                                </Select>
+                                            </FormControl>
+                                            <FormControl>
+                                                <FormLabel fontWeight="semibold">Projeto Relacionado</FormLabel>
+                                                <Select value={vinculo} onChange={(e) => setVinculo(e.currentTarget.value)} size="md">
+                                                    <option value="64b87095c2b4169134de5e8a">Nenhum vínculo</option>
+                                                    {props.todasObras && props.todasObras.map((obra: any) => (
+                                                        <option key={obra._id} value={obra._id}>{obra.type} - {obra.name}</option>
+                                                    ))}
+                                                </Select>
+                                                <FormHelperText>Vincular a outro projeto (opcional)</FormHelperText>
+                                            </FormControl>
+                                        </HStack>
+                                    </VStack>
+                                </CardBody>
+                            </Card>
 
-                                    ))}
-                                    <Flex direction="row" gap={4}>
-                                        <Input
-                                            value={campo}
-                                            onChange={(e) => setCampo(e.target.value)}
-                                            placeholder="Campo"
-                                        />
-                                        <Input
-                                            value={valor}
-                                            onChange={(e) => setValor(e.target.value)}
-                                            placeholder="Valor"
-                                        />
-                                    </Flex>
-                                    <Button onClick={handleAddInputs}>Adicionar Campos</Button>
-                                </>
-                            </Flex>
-                        </Flex>
-                        <Flex flexFlow='wrap' gap={4} mt={4}>
-                            <Flex direction="column" gap={2} w="50%">
-                                <FormLabel>
-                                    <Text fontFamily="Poppins-Medium">Relação</Text>
-                                </FormLabel>
-                                <Select value={vinculo} onChange={(e) => setVinculo(e.currentTarget.value)}>
-                                    <option value="64b87095c2b4169134de5e8a">Selecione um vinculo (opcional)</option>
-                                    {props.todasObras.map((obra: any) => (
-                                        <option value={obra._id}>{obra.type} - {obra.name}</option>
-                                    ))}
-                                </Select>
-                            </Flex>
-                        </Flex>
-                        <Flex flexFlow='wrap' gap={4} mt={4}>
-                            <Flex direction="column" gap={2}>
-                                <FormLabel>
-                                    <Text fontFamily="Poppins-Medium">Imagens</Text>
-                                </FormLabel>
-                                <AddImages setImages={setImages} />
-                                <Flex w="100%">
-                                    <Grid templateColumns="repeat(2, 1fr)" gap={4} w="100%">
-                                        {images && images.map((image: any, index: number) => (
-                                            <GridItem>
-                                                <Image h="250px" w="250px" src={image} alt="Imagem" key={index} />
-                                            </GridItem>
-                                        ))}
-                                    </Grid>
-                                </Flex>
-                            </Flex>
-                        </Flex>
+                            {/* Custom Fields Card */}
+                            <Card bg={cardBg}>
+                                <CardHeader pb={3}>
+                                    <Heading size="md">Campos Personalizados</Heading>
+                                </CardHeader>
+                                <CardBody pt={0}>
+                                    <VStack spacing={4} align="stretch">
+                                        {inputs.length > 0 && (
+                                            <VStack spacing={3} align="stretch">
+                                                {inputs.map((inputPair, index) => (
+                                                    <Card key={index} variant="outline" size="sm">
+                                                        <CardBody>
+                                                            <HStack spacing={3}>
+                                                                <Input
+                                                                    value={inputPair.campo}
+                                                                    onChange={(e) =>
+                                                                        setInputs((prevInputs) =>
+                                                                            prevInputs.map((input, i) =>
+                                                                                i === index ? { ...input, campo: e.target.value } : input
+                                                                            )
+                                                                        )
+                                                                    }
+                                                                    placeholder="Nome do campo"
+                                                                    size="sm"
+                                                                />
+                                                                <Input
+                                                                    value={inputPair.valor}
+                                                                    onChange={(e) =>
+                                                                        setInputs((prevInputs) =>
+                                                                            prevInputs.map((input, i) =>
+                                                                                i === index ? { ...input, valor: e.target.value } : input
+                                                                            )
+                                                                        )
+                                                                    }
+                                                                    placeholder="Valor do campo"
+                                                                    size="sm"
+                                                                />
+                                                                <IconButton
+                                                                    aria-label="Remover campo"
+                                                                    icon={<FiTrash2 />}
+                                                                    size="sm"
+                                                                    variant="ghost"
+                                                                    colorScheme="red"
+                                                                    onClick={() => setInputs((prevInputs) => prevInputs.filter((_, i) => i !== index))}
+                                                                />
+                                                            </HStack>
+                                                        </CardBody>
+                                                    </Card>
+                                                ))}
+                                            </VStack>
+                                        )}
+                                        
+                                        <Card variant="outline" borderStyle="dashed">
+                                            <CardBody>
+                                                <VStack spacing={3}>
+                                                    <Text fontSize="sm" color="gray.600">
+                                                        Adicione campos personalizados para informações específicas desta obra
+                                                    </Text>
+                                                    <HStack spacing={3} w="100%">
+                                                        <Input
+                                                            value={campo}
+                                                            onChange={(e) => setCampo(e.target.value)}
+                                                            placeholder="Nome do campo (ex: Área)"
+                                                            size="sm"
+                                                        />
+                                                        <Input
+                                                            value={valor}
+                                                            onChange={(e) => setValor(e.target.value)}
+                                                            placeholder="Valor do campo (ex: 250m²)"
+                                                            size="sm"
+                                                        />
+                                                    </HStack>
+                                                    <Button 
+                                                        leftIcon={<FiPlus />}
+                                                        onClick={handleAddInputs}
+                                                        colorScheme="blue"
+                                                        variant="outline"
+                                                        size="sm"
+                                                        isDisabled={!campo || !valor}
+                                                    >
+                                                        Adicionar Campo
+                                                    </Button>
+                                                </VStack>
+                                            </CardBody>
+                                        </Card>
+                                    </VStack>
+                                </CardBody>
+                            </Card>
+
+                            {/* Images Card */}
+                            <Card bg={cardBg}>
+                                <CardHeader pb={3}>
+                                    <HStack justify="space-between">
+                                        <Heading size="md">Imagens da Obra</Heading>
+                                        <AddImages setImages={setImages} />
+                                    </HStack>
+                                </CardHeader>
+                                <CardBody pt={0}>
+                                    {images && images.length > 0 ? (
+                                        <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={4}>
+                                            {images.map((image: any, index: number) => (
+                                                <Card key={index} variant="outline">
+                                                    <CardBody p={2}>
+                                                        <Image 
+                                                            h="150px" 
+                                                            w="100%" 
+                                                            src={image} 
+                                                            alt={`Imagem ${index + 1}`}
+                                                            objectFit="cover"
+                                                            borderRadius="md"
+                                                        />
+                                                        <Text fontSize="xs" color="gray.600" mt={2} textAlign="center">
+                                                            Imagem {index + 1}
+                                                        </Text>
+                                                    </CardBody>
+                                                </Card>
+                                            ))}
+                                        </Grid>
+                                    ) : (
+                                        <Box textAlign="center" py={8} color="gray.500">
+                                            <FiImage size={48} />
+                                            <Text mt={2}>Nenhuma imagem adicionada</Text>
+                                            <Text fontSize="sm">Use o botão "Adicionar Imagens" para começar</Text>
+                                        </Box>
+                                    )}
+                                </CardBody>
+                            </Card>
+                        </VStack>
                     </ModalBody>
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3} isDisabled={isLoading || slugError || !nome.length} onClick={() => handleSubmit()}>
-                            Salvar
+                        <Button 
+                            colorScheme="blue" 
+                            mr={3} 
+                            isLoading={isLoading}
+                            loadingText="Criando obra..."
+                            onClick={handleSubmit}
+                            leftIcon={<FiPlus />}
+                            isDisabled={slugError || !nome.length}
+                        >
+                            Criar Obra
                         </Button>
-                        <Button variant='ghost' onClick={onClose}>Fechar</Button>
+                        <Button variant="ghost" onClick={handleClose}>
+                            Cancelar
+                        </Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

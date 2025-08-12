@@ -12,7 +12,7 @@ interface ModalCancelProps {
 export default function DeleteImages(props: ModalCancelProps) {
     const { isOpen, onClose, onOpen } = useDisclosure()
     const [, setIsLoading] = useState<boolean>(false);
-    const toastIdRef = useRef<any>()
+    const toastIdRef = useRef<any>({})
     const sysValidation = useValidation();
     const toast = useToast();
     const deleteGaleryImages = async () => {

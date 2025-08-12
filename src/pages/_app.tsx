@@ -1,4 +1,5 @@
-import { ChakraProvider, extendTheme, keyframes } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { keyframes } from '@emotion/react';
 import type { AppProps } from 'next/app'
 import "../styles/index.css";
 import 'swiper/swiper-bundle.min.css';

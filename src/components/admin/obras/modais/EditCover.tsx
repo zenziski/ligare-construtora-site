@@ -68,7 +68,7 @@ export default function EditCover() {
 
     return (
         <>
-            <Button cursor="pointer" ml={2} onClick={onOpen} height='40px' width='60px' colorScheme="blue" variant="outline">
+            <Button cursor="pointer" ml={2} onClick={onOpen} height='40px' width='60px' colorScheme="blue" variant="">
                 <LinkIcon />
             </Button >
 
